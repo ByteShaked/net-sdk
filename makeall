@@ -1,0 +1,60 @@
+#!/bin/bash
+
+MODE="Debug"
+PROF=""
+COMMAND="$1"
+
+CUR_PATH=`pwd`
+cd ../../..
+ROOT_PATH=`pwd`
+cd ${CUR_PATH}
+
+export LANGUAGE=en_US.en
+#BUILD_VERSION=`svn info|grep -e 'Revision' -e 'banben'|awk -F' ' '{print $2}'`
+BUILD_VERSION=`svn info|grep -e 'Last\ Changed\ Rev' |awk -F' ' '{print $4}'`
+[ -f ${CUR_PATH}/version ] && source ${CUR_PATH}/version
+
+if [ "${BUILD_VERSION}" = "" ];then
+    BUILD_VERSION="0"
+fi
+
+if [ "${MAJOR_VERSION}" = "" ];then
+    MAJOR_VERSION="1"
+fi
+if [ "${MINOR_VERSION}" = "" ];then
+    MINOR_VERSION="0"
+fi
+if [ "${RELEASE_VERSION}" = "" ];then
+    RELEASE_VERSION="0"
+fi
+
+do_make() {
+        mkdir build
+        cd build
+		echo "cmake ../ -DCMAKE_BUILD_TYPE=$MODE -DMAJOR_VERSION=$MAJOR_VERSION -DMINOR_VERSION=$MINOR_VERSION -DRELEASE_VERSION=$RELEASE_VERSION -DBUILD_VERSION=$BUILD_VERSION"
+		cmake ../ -DCMAKE_BUILD_TYPE=$MODE -DMAJOR_VERSION=$MAJOR_VERSION -DMINOR_VERSION=$MINOR_VERSION -DRELEASE_VERSION=$RELEASE_VERSION -DBUILD_VERSION=$BUILD_VERSION
+        make all -lrt
+        cd ..
+}
+
+case $COMMAND in
+  Debug|Release|RelWithDebInfo|MinSizeRel)
+	echo
+	echo "building debug library into lib/$COMMAND"
+	MODE=$COMMAND
+	do_make
+	;;
+  clean)
+	cd build
+	make clean
+	cd ..
+	;;
+*)
+	echo
+	echo "usage: ./makeall [Debug|Release|RelWithDebInfo|MinSizeRel|clean]"
+	echo
+	exit 1
+esac
+
+
+exit 0
