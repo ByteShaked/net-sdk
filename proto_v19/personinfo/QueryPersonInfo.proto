@@ -1,0 +1,6 @@
+option java_package = "com.yuntongxun.auth.core.protobuf";
+//option optimize_for = LITE_RUNTIME;;
+
+message QueryPersonInfoInner {
+	optional string useracc = 1; // 账号
+}

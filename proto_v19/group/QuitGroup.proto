@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package tutorial;
+
+message QuitGroupInner{
+	optional string quitor = 1;//退出者
+	optional string groupId = 2;//群组id
+}

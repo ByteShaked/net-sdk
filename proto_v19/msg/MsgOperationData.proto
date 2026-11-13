@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package tutorial;
+
+message MsgOperationDataInner{
+	optional string msgId = 1; //消息ID
+	optional string msgSender = 2; //消息ID
+	repeated OperationData operationData=3;//消息可能一次返回多个用户的数据
+	optional string groupId = 4; //删除通知时,消息接收者如果为群组，为该字符赋值
+	optional uint32 type = 5; //操作类型 1 数据同步 2 删除通知
+}
+
+message OperationData{
+	optional string receiver = 1; //消息接收者
+	optional uint64 version= 2; //消息接收者版本号
+	optional string dateCreate = 3; //消息创建时间
+}

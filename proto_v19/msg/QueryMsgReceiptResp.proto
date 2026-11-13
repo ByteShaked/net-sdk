@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package tutorial;
+
+message QueryMsgReceiptRespInner{
+	repeated UserReceiptInfoInner unread = 1; //未读用户
+	repeated UserReceiptInfoInner haveread = 2; //已读用户
+}
+
+message UserReceiptInfoInner{
+	optional string useracc = 1;
+	optional string time = 2;
+}

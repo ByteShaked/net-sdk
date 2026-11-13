@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package tutorial;
+
+message SetDisturbInner {
+	optional string useracc=1; //免打扰账号
+	optional uint32 type=2;  //1:设置免打扰 2:取消免打扰
+}

@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package tutorial;
+
+message GetGroupMembersRespInner{
+	optional string groupId = 1; // 群组id
+	repeated GroupMemberInner members = 2; // 成员
+}
+
+message GroupMemberInner{
+	optional string member = 1; // 成员id
+	optional string nickName = 2; // 昵称
+	optional uint32 speakState = 3; // [default = 1]; // 是否禁言  1:不禁言  2:禁言
+	optional uint32 role = 4; // 角色  1:创建者  2:管理员  3：成员 
+	optional uint32 sex = 5; // 性别 1:男 2：女
+	optional string memberRole = 6; // 群组成员标识角色
+	optional uint32 showNickName = 7;//是否显示群组成员昵称 1是 2否 默认1
+}

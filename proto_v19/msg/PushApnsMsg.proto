@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package tutorial;
+
+message PushApnsMsgInner {
+	optional string appId = 1;
+	optional string deviceToken = 2;
+	optional string sender = 3;
+	optional string receiver = 4;
+	optional string msgContent = 5;
+	optional string msgDomain = 6;
+	optional string msgBadge = 7;
+	optional string msgSound = 8;
+	optional string deviceType = 9;
+	optional string newDeviceToken = 10;
+	optional string pushkitDeviceToken = 11;
+	optional string sourceAddres = 12; //������Դip������������������ɳ��
+}

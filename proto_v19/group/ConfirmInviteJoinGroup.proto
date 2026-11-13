@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package tutorial;
+
+message ConfirmInviteJoinGroupInner{
+	optional string groupId = 1;// 群组id
+	optional string invitor = 2;// 邀请者id
+	optional uint32 confirm = 3;// 1:不同意  2:同意
+}

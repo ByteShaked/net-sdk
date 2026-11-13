@@ -1,0 +1,9 @@
+option java_package = "com.yuntongxun.presence.core.protobuf";
+//option optimize_for = LITE_RUNTIME;
+
+message PublishSubscribeStateInner{
+  optional string useracc = 1;//好友账号
+  optional uint32 type = 2;//类型 1：在线 2：离线
+  optional uint32 subType = 3;//子类型 1：登录 2：登出 3：异常断线
+  optional uint32 deviceType = 4;//设备类型
+}

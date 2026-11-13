@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package tutorial;
+
+message AssignGroupAdminInner{
+	optional string owner = 1;//创建者id （必须是创建者才能指派）
+	optional string memberId = 2;//成员id
+}

@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+package tutorial;
+
+message CreateGroupRespInner {
+        optional string groupId = 1; //群组ID
+}

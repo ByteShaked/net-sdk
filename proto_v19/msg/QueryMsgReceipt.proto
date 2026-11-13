@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package tutorial;
+
+message QueryMsgReceiptInner{
+	optional string msgid=1; //消息id
+	optional string version=2; //消息版本号
+}

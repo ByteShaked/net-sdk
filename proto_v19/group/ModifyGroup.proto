@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package tutorial;
+
+message ModifyGroupInner{
+	optional string modifier = 1; //修改者
+	optional string groupId = 2;  //群组id
+	optional string groupName = 3; //群组名字
+	optional uint32 type = 4; //群组类型 （同学、朋友、同事等）
+    optional string province= 5; //群组省份
+	optional string city= 6; //群组地区
+	optional uint32 scope = 7; // 群组规模 群组规模 1：临时组(上限100人) 2普通组(上限300人)3：普通组(上限500人) 4：付费普通组 (上限1000人) 5：付费VIP组（上限2000人）
+	optional string declared = 8;//群组公告，最长200个字符
+	optional uint32 permission = 9; //群组权限 1：公开群组(可直接加入) 2：需要身份验证 3:私有群组（不能主动加入，仅能管理员邀请）
+	optional string groupDomain = 10;  //群组扩展信息（用于第三方应用传递自己的数据）
+	optional string groupPhoto = 11;//群组头像url
+	optional uint32 isManage = 12;//是否仅群主和管理员可管理群 1:否 2:是 缺省1
+	optional uint32 isAtAll = 13;//是否仅群主和管理员可@所有人 1:否 2:是 缺省1
+	optional uint32 inviteOperation = 14; //普通成员是否可拉人入群 1:是   2:否 缺省1
+	optional uint32 checkAdminFlag = 15; //入群是否需要群主与管理员审核 1:是   2:否 缺省2
+	optional uint32 pushQuitGroupMsg = 16; //是否开启推送退群通知 1:是   2:否 缺省2
+
+}

@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package tutorial;
+
+message SysEventInner{
+	optional string eventId = 1; // 事件ID (唯一即可，可以使用appId、msgId等)
+	optional uint32 eventType  = 2;//[default = 1]; //事件类型 (1：HTTP)
+	optional string eventBody = 3; // 事件
+}

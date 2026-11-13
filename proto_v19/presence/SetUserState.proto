@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+package tutorial;
+
+message SetUserStateInner {
+	optional uint32 subState=1; //状态子类型，用户根据自己的需求定义所需的类型
+}

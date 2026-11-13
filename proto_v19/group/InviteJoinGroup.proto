@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package tutorial;
+
+message InviteJoinGroupInner{
+	optional string invitor = 1; // 邀请者
+	optional string groupId = 2; // 群组id
+	optional string declared = 3; // 邀请理由
+	repeated string members = 4; // 邀请的成员
+	optional uint32 confirm = 5; // 是否需要邀请者确认  1=不需要确认；  2=需要确认
+	optional string ext = 6; //扩展字段，中汇使用，用于传requestId,用来实现消息盒子功能，关联审核与申请的IM消息
+}

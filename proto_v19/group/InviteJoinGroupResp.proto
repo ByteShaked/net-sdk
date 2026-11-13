@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package tutorial;
+
+message InviteJoinGroupRespInner{
+	repeated FailInfo failInfos = 1; //邀请失败的成员
+}
+
+message FailInfo {
+	optional string member = 1; //成员id
+	optional uint32 reason = 2; //1 已加入群组  2用户不存在  3应用未关联  4机器人不能加入群组
+}

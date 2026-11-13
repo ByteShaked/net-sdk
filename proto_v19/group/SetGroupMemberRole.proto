@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package tutorial;
+
+message SetGroupMemberRoleInner{
+	optional string groupId = 1;// 群组id
+	optional string memberId = 2;// 成员id
+	optional uint32 role = 3;//2 管理员 3 普通成员
+	repeated string member = 4;//多个成员
+}

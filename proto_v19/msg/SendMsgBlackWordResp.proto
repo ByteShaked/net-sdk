@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+package tutorial;
+
+message SendMsgBlackWordResp{
+  optional string extOpts = 1;//平台业务扩展字段。
+}

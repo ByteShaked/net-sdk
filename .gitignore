@@ -28,6 +28,8 @@ Makefile
 .vscode/settings.json
 .idea/
 
-# proto 生成的 C++ 文件（从 proto.zip 重新生成）
+# proto 原始定义文件（已打包在 proto.zip，不需要解压版本）
 proto/
 proto_x86_v19/
+
+# proto_v19 是从 tx_napi 复用的已生成代码，纳入版本控制

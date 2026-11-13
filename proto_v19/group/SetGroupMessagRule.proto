@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package tutorial;
+
+message SetGroupMessageRuleInner{
+	optional string groupid = 1;//群组id
+	optional uint32 isNotice = 2;//用来表示是否需要提醒消息。1：提醒；2：不提醒
+	optional uint32 isApplePush = 3;//是否使用苹果离线推送。 1:使用; 2:不使用
+}

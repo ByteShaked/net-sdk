@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package tutorial;
+
+message SyncDCRequestInner {
+	optional string userAcc = 1; //�û��˺�
+
+}

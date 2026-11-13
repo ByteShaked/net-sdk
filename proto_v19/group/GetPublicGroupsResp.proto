@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package tutorial;
+
+message GetPublicGroupsRespInner{
+	repeated PublicGroupSimpleInfo groups=1;//群组数组
+}
+
+message PublicGroupSimpleInfo{
+	optional string groupId = 1;
+	optional string name = 2; //最大20字符
+	optional string owner = 3; //群组创建者
+	optional uint32 permission = 4; //群组权限 1：默认可直接加入  2：需要身份验证    3:私有群组（不能主动加入，仅能管理员邀请）
+	optional uint32 memberCount = 5;//群组成员人数
+	optional uint32 scope = 6; // 群组规模 1：临时组(上限100人)  2：普通组(上限500人)  3：付费普通组 (上限1000人) 4：付费VIP组（上限2000人）
+}

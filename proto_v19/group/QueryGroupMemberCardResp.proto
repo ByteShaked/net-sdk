@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package tutorial;
+
+message QueryGroupMemberCardRespInner{
+	optional string member = 1;//成员id
+	optional string groupid = 2;//群组id
+	optional string display = 3;//显示名称
+	optional string phone = 4;//电话
+	optional string mail = 5;//邮箱地址
+	optional string remark = 6;//备注
+	optional uint32 speakState = 7;// [default = 1]; // 是否禁言  1:不禁言  2:禁言
+	optional uint32 role = 8; // 角色  1:创建者  2:管理员  3：成员 
+	optional uint32 sex = 9; // 性别 1:男 2：女
+	optional string memberRole = 10; // 成员角色自定义
+	optional uint32 showNickName = 11;//是否显示群组成员昵称 1是 2否 默认1
+}

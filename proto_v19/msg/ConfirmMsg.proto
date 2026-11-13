@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package tutorial;
+
+message ConfirmMsgInner{
+	optional uint64 version = 1;//本地消息最大版本号(该消息必须在登录之后才能发送，否则服务器找不到对应的session)
+	optional string groupId = 2;
+}

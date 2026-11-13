@@ -1,14 +1,17 @@
 #pragma once
 #include <vector>
 #include <cstdint>
-#include <unistd.h>
 #include <iostream>
-#include <unistd.h>
 #include <tuple>
 #include <string>
 #include <algorithm>
-#include "../proto_x86_v19/msg2lite.pb.h"
+#include "msg/MsgLite.pb.h"
 #include "crypto_util.h"
+
+// 兼容旧代码：旧版 proto 里消息叫 Person，新版叫 MsgLiteInner
+namespace tutorial {
+    using Person = MsgLiteInner;
+}
 namespace tlv {
 
     struct Packet {

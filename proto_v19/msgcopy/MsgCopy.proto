@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package tutorial;
+
+message MsgCopyInner {
+	optional uint32 msgType = 1; //消息类型 1:文本消息 2：语音消息 3：视频消息  4：图片消息  5：位置消息  6：文件（压缩方式） 7: 文件（非压缩方式）8: 纯链接消息 9:群组通知消息 10: 未接来电消息 11:@功能 文本消息 12:用户自定义消息透传  13:打洞前收集内外网映射地址消息，透传 20：协同服务器透传使用 21：发送即焚消息通知 22：匿名模式开关通知 24:消息已读通知 25:消息撤回通知 30:SDK透传json消息(现恒丰朋友圈使用)
+	optional string msgId = 2; //消息ID
+	optional bytes msgContent = 3;//文本消息内容
+	optional string path = 4;// 文件存放的相对路径/{appId}/{date}
+	optional string msgSender = 5; //发送者账号
+	
+	optional string msgReceiver = 6;//接收者账号
+	optional string msgDomain = 7; //需要扩展的消息字段放在这里
+	optional uint32 msgCompressLen = 8; //本文消息的源长度，如果消息内容经过压缩该字段大于0
+	optional string extOpts = 9;// 平台业务扩展字段
+	optional string deviceType = 10; // 设备类型
+	optional string deviceNo = 11; // 设备号
+	
+	optional string appId = 12; // 应用Id
+	optional string msgTimestamp = 13; // 消息发送时间，字符串类型，Long类型时间戳	
+	optional string fromNick = 14; // 发送方昵称，字符串类型
+	repeated string tMembers = 15; // 跟本次群操作有关的用户accid，仅在convType为TEAM或CUSTOM_TEAM时含此字段，字符串类型。  tMembers格式举例： { ... // 其他字段 "tMembers":"[123, 456]" //相关的accid为 123 和 456 }
+	repeated string atUser = 16; // @用户的账号，如果是@全体成员，则该值为群组id
+	optional string antispam = 17; //标识是否被反垃圾，仅在开启黑词校验，且为同步校验 才有此字段，可转为Boolean类型数据
+	optional uint32 notifyType = 18; // 群组通知类型
+	optional uint32 confirm = 19; // 群组操作标识
+	optional uint32 envType = 20; // 抄送类型 1:CONVERSATION(IM,群聊,REST,群组通知),2:登陆通知,3:登出通知,4:消息已读
+}

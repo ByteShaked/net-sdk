@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package tutorial;
+
+message ForbidMemberSpeakInner{
+	optional string operator = 1;//操作者
+	optional string groupId = 2;//群组id
+	optional string member = 3;//成员
+	optional uint32 forbidState = 4;//是否禁言 1: 禁言状态恢复正常  2:禁言
+	optional uint32 allForbid=5;//0:单人禁言 1:除操作者外全部禁言 缺省0
+	repeated string members = 6;//多个成员
+}

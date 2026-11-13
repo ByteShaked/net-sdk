@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package tutorial;
+
+message AppleMsgInner {
+	optional bytes msgContent = 1;//文本消息内容
+	optional string msgSender = 2; //发送者账号
+	optional string msgReceiver = 3;//接收者账号
+	optional string msgDomain = 4; //需要扩展的消息字段放在这里
+	optional string msgBadge = 5; //IOS设备显示的未读条数
+	optional string msgSound = 6; //IOS设备收到苹果推送后的声音
+	optional string appId = 7;
+}

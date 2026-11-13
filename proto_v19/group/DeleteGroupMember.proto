@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package tutorial;
+
+message DeleteGroupMemberInner{
+	optional string deletor = 1;//删除者
+	optional string groupId = 2;//群组id
+	repeated string member = 3;//删除的成员
+}

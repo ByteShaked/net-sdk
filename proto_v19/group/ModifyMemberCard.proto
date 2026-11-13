@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package tutorial;
+
+message ModifyMemberCardInner{
+	optional string belong = 1;//所属群组
+	optional string member = 2;//被修改人
+	optional string display = 3;//显示名称
+	optional string phone = 4;//电话号
+	optional string mail = 5;//邮箱
+	optional string remark = 6;//备注
+	optional string memberRole = 7;//群成员角色
+	optional string showNickName = 8;//是否显示群组成员昵称
+}

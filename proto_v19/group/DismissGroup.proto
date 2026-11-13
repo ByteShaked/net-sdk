@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package tutorial;
+
+message DismissGroupInner {
+	optional string operator = 1;//删除者
+	optional string groupId = 2;//群组id
+	optional uint32 target = 3;////群组业务模式 缺省不传该值表示群组模式  1：讨论组模式 2：群组模式
+}

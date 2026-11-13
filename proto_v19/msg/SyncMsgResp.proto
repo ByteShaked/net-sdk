@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package tutorial;
+
+message SyncMsgRespInner{
+    repeated InstantMessage syncMessages=1; // 支持一次请求同步多条消息
+    optional string groupId = 2;//群id
+}
+
+message InstantMessage{
+	optional uint64 version= 1; //消息版本号
+	optional uint32 msgType = 2; //消息类型 1:文本消息 2：语音消息 3：视频消息  4：表情消息  5：位置消息   6：文件（压缩方式） 7: 文件（非压缩方式）
+	optional string msgId = 3; //消息ID
+	optional bytes msgContent = 4;//文本消息内容
+	optional string msgSender = 5; //发送者账号
+	optional string msgReceiver = 6;//接收者账号
+	optional string msgDomain = 7; //需要扩展的消息字段放在这里
+	optional string msgFileName = 8; //消息文件名
+	optional string msgFileUrl = 9; //消息下载地址
+	optional string msgDateCreated = 10; //服务器接收消息时间(ms)
+	optional uint32 msgCompressLen = 11; //本文消息的源长度，如果消息内容经过压缩该字段大于0
+	optional bytes msgData = 12; //语音数据 注意：为了保持跟发送文本的一致体验，把60s语音当做特殊文本，必须经过压缩（小于60K），才允许使用该字段。
+	optional uint32 mcmEvent=13; //没有值，原来消息     大于0时，多渠道事件消息
+	optional string msgFileSize = 14; //文件大小（字节）
+	optional string extOpts = 15;//平台业务扩展字段。
+    optional string senderNickName = 16; //发送者昵称
+	optional string replyMsgFlag=17; //是否存在回复消息
+  optional string serviceMsgId=18;//服务端消息ids
+}

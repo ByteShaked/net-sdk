@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package tutorial;
+
+message NoticeMsgInner {
+	optional uint32 msgType = 1; //消息类型 1:文本消息 2：语音消息 3：视频消息  4：图片消息  5：位置消息  6：文件（压缩方式） 7: 文件（非压缩方式）8: 纯链接消息 9:群组通知消息 10: 未接来电消息 11:@功能 文本消息 12:用户自定义消息透传  13:打洞前收集内外网映射地址消息，透传 20：协同服务器透传使用 21：发送即焚消息通知 22：匿名模式开关通知 30:SDK透传json消息(现恒丰朋友圈使用)
+	optional string msgId = 2; //消息ID
+	optional uint32 pushType = 3; // 1: 账号 2:群组
+	optional bytes msgContent = 4;//文本消息内容
+	optional string msgSender = 5; //发送者账号
+	optional string msgDomain = 6; //需要扩展的消息字段放在这里
+	optional string msgFileName = 7; //消息文件名
+	optional string dateCreated = 8; //消息创建时间
+	optional string fileUrl = 9; //文件存放路径
+	optional uint32 msgCompressLen = 10; //消息压缩后长度
+	optional uint32 msgLength = 11; //消息源长度
+	optional uint32 msgFileSize = 12; //附件大小
+	optional string senderNickName = 13; //发送者昵称
+	optional string msgData = 14; //语音数据 注意：为了保持跟发送文本的一致体验，把60s语音当做特殊文本，必须经过压缩（小于60K），才允许使用该字段。
+	repeated string realReceivers = 15; //消息的真正接受者
+	optional string groupId = 16; //消息接收群组
+	optional string msgLocalName = 17; //
+	optional string extOpts = 18; //
+	optional string path = 19; //
+	optional uint32 extBusines= 20; //其他 1 表示需要进行附件同步
+	
+}

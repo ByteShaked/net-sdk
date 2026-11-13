@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package tutorial;
+
+message MsgLiteInner {
+	optional uint32 protoType = 1;  // 消息类型  参考文件：方法类型数值说明.txt
+	optional bytes protoData = 2;  // 消息数据
+	optional uint32 protoClientNo= 3;  // 用于存放客户端流水号
+	optional string protoBackExp = 4;  // 用于存放后台模块的扩展信息
+	optional string protoSource = 5;  // 用于存放生产者源地址
+	optional uint32 protoErrorCode = 6; // 服务器返回错误码
+	optional uint32 protoEncrypt = 7;  // 是否加密，有值就是加密
+	optional string protoToken = 8;  // 精简认证token
+	optional string protoRouter = 9;  // 路由
+}

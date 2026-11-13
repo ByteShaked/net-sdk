@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package tutorial;
+
+message DataCopyMsgInner {
+	optional uint32 storeType = 1;// [default = 1]; // 存储类型 1: Redis 缺省。
+	optional uint32 operateType = 2; //操作类型 1 数据复制，2 业务转发
+	optional uint32 level = 4;   // 缺省为空表示3次重试后丢弃
+	optional string dbsql = 5;   //数据操作的语句
+	optional bytes protocol = 6;   // 转发的msgLite
+	optional string lvs = 7;   //附件下载lvs
+	optional string useracc = 8;   //接收者
+}

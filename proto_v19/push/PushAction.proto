@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package tutorial;
+
+message MsgRealInner{
+	optional uint32 actionType = 1 ;//[default = 1]; // 推送类别   1：普通消息   2：指令消息   3: 后台推送
+	optional uint64 version = 2; //版本号
+	optional string groupId=3; // 群组ID（群组消息需要带上此字段）
+	optional uint32 msgType = 4; //消息类型 1:文本消息 2：语音消息 3：视频消息  4：图片消息  5：位置消息  6：文件 
+	optional string msgId = 5; //消息ID
+	optional bytes msgContent = 6;//文本消息内容
+	optional string msgSender = 7; //发送者账号 （这里是简单账号，不包含appId）
+	optional string msgReceiver=8; // 接收者账号（这里是简单账号，不包含appId）
+	optional string msgDomain = 9; //需要扩展的消息字段放在这里
+	optional string msgFileName = 10; //消息文件名
+	optional string msgFileUrl = 11; //消息下载地址
+    optional string msgDateCreated = 12; //服务器接收消息时间（ms）
+	optional uint32 msgCompressLen = 13; //本文消息的源长度，如果消息内容经过压缩该字段大于0
+	optional bytes msgData = 14; //语音数据 注意：为了保持跟发送文本的一致体验，把60s语音当做特殊文本，必须经过压缩（小于60K），才允许使用该字段。
+	optional uint32 msgLength = 15; // 包体的数据长度
+	optional string senderNickName = 16; // 发送者的昵称
+	optional uint32 unReadSize = 17 ;//[default = 1]; // 接收者未读条数（用于苹果推送）
+	optional string msgFileSize = 18; //文件大小（字节）
+	optional string extOpts = 19;//平台业务扩展字段。
+	optional uint32 mcmEvent=20; //取MCMEvent
+	optional string serviceMsgId=21;//服务端消息id
+}
+
+message MsgRouteInner{
+    optional string appId=1; 
+    optional string username=2; 
+    optional string deviceno=3; 
+    optional string connectorId=4; 
+    optional string sessionId=5; 
+    optional string remoteAddr=6;
+    optional string network=7;
+}
+
+message PresenceRealInner {
+	optional string receiver= 1; // 接收者
+	optional string nickName= 2; // 发生变化的用户的昵称（发生变化的用户账号在MsgRouteInner中）
+	optional uint32 state = 3; //类型 1：在线 2：离线
+	optional uint32 subState = 4; // 在线子类型 1:  请勿打扰  2：离开 3：忙碌 4：隐身
+	optional uint32 network = 5; // 1: WIFI 2: 4G  3: 3G  4: 2G(EDGE) 5: INTERNET  6: other
+	optional string timestamp= 6; //时间戳
+	optional string userdata = 7; // 私有数据
+}
+
+message PushActionInner {
+	repeated MsgRealInner msgReal = 1; // 消息内容
+	optional MsgRouteInner msgRoute = 2; // Connector信息
+	optional uint32 pushType = 3; // 实际的推送类型 缺省可以不写表示Message 2: 好友状态  3: 同步状态  4: 实时消息
+	repeated PresenceRealInner presenceReal = 4; // 状态内容
+	repeated MsgRouteInner syncStateReal = 5; // 多设备同步状态内容
+}

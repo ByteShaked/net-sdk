@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+package tutorial;
+
+message AppleBadgeNumberInner {
+	optional int32 badgeNumber = 1; //上传到服务器本地的角标数
+}

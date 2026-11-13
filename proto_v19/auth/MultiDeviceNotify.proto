@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package tutorial;
+
+message DeviceStatusInner {
+	optional string notifyType = 1; //1：通知有设备在线 2：通知有设备离线
+	optional uint32 deviceType = 2; //设备类型,1: Android Phone 2: iPhone 10: iPad 11: Android Pad 20: PC 21: HTML5 WEBSOCKET 22:MAC
+}
+
+message MultiDeviceNotifyInner {
+	repeated DeviceStatusInner deviceStatus = 1; //设备状态
+}

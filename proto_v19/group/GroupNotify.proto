@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package tutorial;
+
+
+//	ECGroupNotice_Dissmiss = 0;
+//	ECGroupNotice_Invite = 1;
+//	ECGroupNotice_Propose = 2;
+//	ECGroupNotice_Join = 3;
+//	ECGroupNotice_Quit = 4;
+//	ECGroupNotice_RemoveMember = 5;
+//	ECGroupNotice_ReplyInvite = 6;
+//	ECGroupNotice_ReplyJoin = 7;
+
+message GroupNotifyMessageInner{
+	optional uint32 msgType=1; // ��Ϣ���� 1: �û�������������Ϣ 2��
+	optional string groupId = 2;
+	optional string dateCreated = 3;
+	optional string admin = 4;
+	optional string declared = 5;
+	optional uint32 confirm = 6;
+	optional string member = 7;
+}

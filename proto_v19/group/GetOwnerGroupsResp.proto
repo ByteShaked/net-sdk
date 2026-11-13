@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package tutorial;
+
+message GetOwnerGroupsRespInner{
+	repeated GroupSimpleInfo groups=1;//群组数组
+}
+message GroupSimpleInfo{
+	optional string groupId = 1;
+	optional string name = 2; //最大20字符
+        optional string owner = 3; //群组创建者
+	optional uint32 permission = 4; //群组权限 1：默认可直接加入  2：需要身份验证    3:私有群组（不能主动加入，仅能管理员邀请）
+	optional uint32 isNotice = 5;//用来表示是否需要提醒消息。1：提醒；2：不提醒
+	optional uint32 memberCount = 6;//群组成员人数
+	optional uint32 scope = 7; // 群组规模群组规模 1：临时组(上限100人) 2普通组(上限300人)3：普通组(上限500人) 4：付费普通组 (上限1000人) 5：付费VIP组（上限2000人）
+	optional string dateCreated = 8;//群组创建时间
+	optional uint32 target = 9;  //群组业务模式 缺省不传该值表示群组模式  1：讨论组模式
+	
+	message GroupMemberInner{
+	optional string member = 1; // 成员id
+	optional string nickName = 2; // 昵称
+	optional uint32 speakState = 3 ;//[default = 1]; // 是否禁言  1:不禁言  2:禁言
+	optional uint32 role = 4; // 角色  1:创建者  2:管理员  3：成员 
+	optional uint32 sex = 5; // 性别 1:男 2：女
+}
+	repeated GroupMemberInner members = 10; // 群组内部分成员
+	optional uint32 type = 11;  //群组类型 （同学、朋友、同事等）1: 同学  2: 朋友 3: 同事
+	optional string groupDomain = 12;  //群组扩展信息（用于第三方应用传递自己的数据）
+	optional uint32 isForbid = 13;//群组禁言标识 1：非禁言 2：禁言
+	optional uint32 isManage = 14;//是否仅群主和管理员可管理该群 1:否 2:是
+	optional uint32 isAtAll = 15;//是否仅群主和管理员可@全体 1:否 2:是
+	optional uint32 inviteOperation = 16;//普通成员是否可拉人入群 1:是 2:否
+	optional uint32 checkAdminFlag = 17;//入群是否需要群主与管理员审核 1:是 2:否
+	optional uint32 pushQuitGroupMsg = 18; //是否开启推送退群通知 1:是   2:否 缺省2
+	optional uint32 showNickName = 19; //是否需要显示群组中成员昵称 1显示 2关闭 缺省1
+	optional uint32 maxVersion = 20; //最大版本号//查询个人在群组的版本号显示用
+	optional uint32 confirmVersion = 21; //上报版本号//查询个人在群组的版本号显示用
+}

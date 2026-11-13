@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+package tutorial;
+
+message GetPublicGroupsInner{
+	optional uint32 limit = 1;//获取公共群组数量,默认50
+}

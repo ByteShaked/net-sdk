@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+package tutorial;
+
+message UserAuthRespInner {
+        optional uint32 authState=1; // 1: Kick Off
+	optional string kickoffText=2; // Kick Off 提示信息
+        optional string connectorId=3; // 鉴权成功后，返回连接器编号
+        optional uint64 version=4; // 服务器消息最大版本号
+	optional uint32 collect=5; // 设备信息采集上报方式 1：采集关键信息后立刻上报（UA[厂商+型号]、IOS Device Token） 2：采集全部信息后在WIFI下上报
+	optional TransferPolicy transferPolicy = 6; // 迁移策略，不为空即启动（仅在完整认证后返回）
+	optional uint64 pversion = 7;// 个人资料版本号
+	optional string softVersion = 8;// 软件最新版本号
+	optional uint32 updateMode = 9;// 更新模式  1：手动更新 2：强制更新
+	optional uint64 historyver=10; // 离线消息开始版本号
+	optional string authToken=11; // 精简认证Token（仅在完整认证后返回）
+	optional IpSpeedTestPolicy ipSpeedTestPolicy=12; // IP测速策略，不为空即启动（仅在完整认证后返回）
+	optional LogUploadPolicy logUploadPolicy=13; // 日志上传策略，不为空即启动（仅在完整认证后返回）
+	optional uint32 appleDeviceToken=14; // 0或空:不需要上传token 1: 需要SDK上传deviceToken 2:需要SDK上传pushkittoken 3:需要SDK上传devicetoken和pushkittoken（该字段仅用于IOS设备，一般为空）
+	optional ConfigParams configParams=15; // 服务器配置参数
+	optional string updateDesc=16;// 软件更新说明
+	optional uint32 offlineCall=17;// 0或者无 无离线呼叫； 1有离线呼叫
+	optional string redPacketToken=18;// 红包token
+	optional uint64 timestamp=19;// 时间戳
+  optional MediaDataUploadPolicy mediadatapolicy=20;//媒体数据上报策略
+    optional string extOpts=21;// 平台业务扩展字段
+}
+
+message ServerAddr {
+	optional string ip=1; // IP地址
+	optional uint32 port=2; // 端口号
+	optional uint32 type=3;// 类型 1: Connector 2: LVS  3: FileServer 4: websocket
+}
+
+message ConfigParams {
+	optional uint32 lots=1; //本地上报版本号的频值
+}
+
+message TransferPolicy {
+        repeated ServerAddr addr=1; // 待迁移的服务器地址，不为空即采用服务器指定IP，如果有多个，可以随机选择1个。否则使用本地IP
+        optional uint32 type=2;  // 迁移类型  1：立即迁移 2：断线迁移
+}
+
+message LogUploadPolicy{
+	optional uint32 enableLog = 1;  // 1:开启  2: 关闭
+	optional uint32 level = 2;  // 日志级别，当enableLog为1时有此段，缺省为Debug。
+	optional uint32 policy = 3; // 停止日志后上传策略   1、立即  2、仅wifi
+	optional uint32 timeout= 4; // 日志超时，超时后自动关闭且上传 （单位分钟），当enableLog为1时可以有此段
+}
+
+message IpSpeedTestPolicy{
+	optional uint32 policyType = 1; // 1、轮询本地  2、轮询指定ip （缺省传2）
+	repeated ServerAddr serverAddr = 2; // 待测试的服务器IP
+	optional uint32 count = 3; // 发包数 （缺省不传）
+	optional uint32 interval = 4; // 发送间隔 （单位：毫秒） （缺省不传）
+	optional uint32 timeout = 5; // 单包接收超时时间 （单位：毫秒） （缺省不传）
+	optional uint32 uploadPolicy = 6;  // 1、仅wifi下（走文件服务器）（缺省走TCP长连接）
+	optional string remoteHost = 7; // 客户端外网IP地址（走TCP长连接不传该字段）
+}
+
+message MediaDataUploadPolicy{
+	optional uint32 summaryRule = 1;  //摘要信息 1:周期上报 2:前后上报
+	optional uint32 summaryTime = 2;  //摘要信息 上报周期或时间段  单位:秒
+	optional uint32 detailRule = 3; //详细信息 1:周期上报 2:前后上报
+	optional uint32 detailTime = 4; //详细信息 上报周期或时间段  单位:秒
+}

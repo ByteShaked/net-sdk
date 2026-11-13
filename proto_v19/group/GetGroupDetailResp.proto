@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package tutorial;
+
+message GetGroupDetailRespInner{
+        optional string creator = 1; //创建者
+        optional string groupName = 2; //群组名字(最大20个字符)
+	optional uint32 type = 3; //群组类型 （同学、朋友、同事等）1: 同学  2: 朋友 3: 同事
+        optional string province= 4; //群组省份
+	optional string city= 5; //群组地区
+	optional uint32 scope = 6; // 群组规模 群组规模 1：临时组(上限100人) 2普通组(上限300人)3：普通组(上限500人) 4：付费普通组 (上限1000人) 5：付费VIP组（上限2000人）
+	optional string declared = 7;//群组公告，最长200个字符
+	optional string dateCreated = 8;//群组创建时间
+	optional uint32 numbers = 9;// 群组成员个数
+	optional uint32 isNotice = 10;//用来表示是否需要提醒消息。1：提醒；2：不提醒
+	optional uint32 permission = 11;//群组权限 1：公开群组(可直接加入) 2：需要身份验证 3:私有群组（不能主动加入，仅能管理员邀请）
+	optional string groupDomain = 12;  //群组扩展信息（用于第三方应用传递自己的数据，原样返回）
+	optional uint32 isApplePush = 13;//是否使用苹果离线推送。 1:使用; 2:不使用
+	optional uint32 target = 14;  //群组业务模式 缺省不传该值表示群组模式  1：讨论组模式
+	optional uint32 anonymity = 15;  //发言模式 1 匿名模式 0 正常模式
+	optional uint32 isForbid =16;//禁言标识 1:非禁言 2：禁言
+	optional string groupPhoto= 17; //群组url
+	optional uint32 isManage = 18; //是否仅群主和管理员可管理群 1:否 2:是 缺省1
+	optional uint32 isAtAll = 19; //是否仅群主和管理员可@所有人 1:否 2:是 缺省1
+	optional uint32 inviteOperation = 20; //普通成员是否可拉人入群 1:是 2:否 缺省1
+	optional uint32 checkAdminFlag = 21; //入群是否需要群主与管理员审核 1:是 2:否 缺省2
+	optional uint32 pushQuitGroupMsg = 22; //是否开启推送退群通知 1:是   2:否 缺省2
+	optional uint32 showNickName = 23; //是否需要显示群组中成员昵称 1显示 2关闭 缺省1
+	
+}

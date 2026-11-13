@@ -1,82 +1,112 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
-PROJECT(im_network)
-# 查找 OpenSSL 包
-# find_package(PkgConfig REQUIRED)
-# pkg_check_modules(OPENSSL REQUIRED IMPORTED_TARGET openssl)
+cmake_minimum_required(VERSION 3.15)
+project(im_network VERSION 1.0.0)
 
-if(CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 5.0)
-message(gcc version too high, Unable to guarantee successful compilation)
-endif()
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-SET(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-# Add defined macro
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D__STDC_LIMIT_MACROS -D__STDC_FORMAT_MACROS -D_LOG4CXX_SPI_LOCATION_LOCATIONINFO_H -std=c++11")
-# Set some values
-SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS} -O0 -g")
-SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS} -O2 -fPIC -Wl,-z,now -Wl,-z,relro -fPIE -pie -fstack-protector-all -D_FORTIFY_SOURCE=2")
-SET(CMAKE_SKIP_RPATH TRUE)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-SET(ROOT ${CMAKE_CURRENT_SOURCE_DIR})
-SET(EXECUTABLE_OUTPUT_PATH ${ROOT}/bin)
-set(LIBRARY_OUTPUT_PATH ${ROOT}/lib)
-
-if(BUILD_VERSION)
-    add_definitions(-DBUILD_VERSION=${BUILD_VERSION})
-else()
-    add_definitions(-DBUILD_VERSION=0)
+# ============================================================
+# 平台检测
+# ============================================================
+if(WIN32)
+    add_definitions(-DPLATFORM_WINDOWS)
+elseif(APPLE)
+    add_definitions(-DPLATFORM_MACOS)
+elseif(UNIX)
+    add_definitions(-DPLATFORM_LINUX)
 endif()
 
-if(MAJOR_VERSION)
-    add_definitions(-DMAJOR_VERSION=${MAJOR_VERSION})
-else()
-    add_definitions(-DMAJOR_VERSION=1)
+# ============================================================
+# 版本号
+# ============================================================
+if(NOT BUILD_VERSION)
+    set(BUILD_VERSION 0)
 endif()
-
-if(MINOR_VERSION)
-    add_definitions(-DMINOR_VERSION=${MINOR_VERSION})
-else()
-    add_definitions(-DMINOR_VERSION=0)
+if(NOT MAJOR_VERSION)
+    set(MAJOR_VERSION 1)
 endif()
-
-if(RELEASE_VERSION)
-    add_definitions(-DRELEASE_VERSION=${RELEASE_VERSION})
-else()
-    add_definitions(-DRELEASE_VERSION=0)
+if(NOT MINOR_VERSION)
+    set(MINOR_VERSION 0)
 endif()
-add_definitions(-D LINUX)
-
-SET(PROTO /usr/local/protobuf_v19/)
-SET(BOOST /usr/local/boost/)
-
-SET(TARGET ${PROJECT_NAME})
-
-# Include path
-INCLUDE_DIRECTORIES(
-    ${ROOT}/include
-    ${ROOT}/
-    ${PROTO}/include
-    ${BOOST}/include
-
+if(NOT RELEASE_VERSION)
+    set(RELEASE_VERSION 0)
+endif()
+add_definitions(
+    -DBUILD_VERSION=${BUILD_VERSION}
+    -DMAJOR_VERSION=${MAJOR_VERSION}
+    -DMINOR_VERSION=${MINOR_VERSION}
+    -DRELEASE_VERSION=${RELEASE_VERSION}
 )
 
-# Lib path
-LINK_DIRECTORIES(
-    ${ROOT}/lib
-    ${PROTO}/lib
-    ${BOOST}/lib/
+# ============================================================
+# 查找依赖（自动适配各平台安装路径）
+# ============================================================
+find_package(Protobuf REQUIRED CONFIG)  # CONFIG 模式，支持 Protobuf_DIR 精确指定版本
+find_package(Boost REQUIRED COMPONENTS system)
+find_package(ZLIB REQUIRED)             # protobuf 3.19.x 依赖 zlib
+
+message(STATUS "Protobuf version:  ${Protobuf_VERSION}")
+message(STATUS "Protobuf include:  ${Protobuf_INCLUDE_DIRS}")
+message(STATUS "Protobuf libs:     ${Protobuf_LIBRARIES}")
+message(STATUS "Boost include:     ${Boost_INCLUDE_DIRS}")
+message(STATUS "Boost libs:        ${Boost_LIBRARIES}")
+
+# ============================================================
+# proto 生成文件（从 proto_v19/ 复用，不重新生成）
+# ============================================================
+file(GLOB_RECURSE PROTO_SOURCES
+    "${CMAKE_CURRENT_SOURCE_DIR}/proto_v19/*.pb.cc"
 )
 
-# Libraries
-SET(PROJECT_LIBRARY
-
+# ============================================================
+# 源文件
+# ============================================================
+set(NETWORK_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/NetworkModule.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/network_api.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/TlvHandler.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/crypto_util.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/NetLog.cpp
+    ${PROTO_SOURCES}
 )
 
-FILE(GLOB_RECURSE CPPFiles ${ROOT}/src/*.cpp ${ROOT}/src/*.c  ${ROOT}/proto/*.cc ${ROOT}/include/*.hpp ${ROOT}/include/*.h  ${ROOT}/proto/*.pb.h)
+# ============================================================
+# 头文件路径
+# ============================================================
+set(NETWORK_INCLUDE_DIRS
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/proto_v19          # 3.19.5 头文件，必须在系统 protobuf 前面
+    ${Boost_INCLUDE_DIRS}
+)
 
-ADD_EXECUTABLE(${PROJECT_NAME} ${CPPFiles})
+# ============================================================
+# 编译动态库 libnetwork
+# ============================================================
+add_library(network SHARED ${NETWORK_SOURCES})
 
-target_link_libraries(${PROJECT_NAME} ${PROJECT_LIBRARY})
+target_include_directories(network PRIVATE ${NETWORK_INCLUDE_DIRS})
 
-# C接口动态库
-add_library(network SHARED ${ROOT}/src/network_api.cpp ${ROOT}/src/crypto_util.cpp ${ROOT}/src/NetworkModule.cpp ${ROOT}/src/TlvHandler.cpp ${ROOT}/proto/msg2lite.pb.cc ${ROOT}/include/common.h ${ROOT}/include/crypto_util.h ${ROOT}/include/NetworkModule.h ${ROOT}/include/TlvHandler.h ${ROOT}/proto/msg2lite.pb.h)
+target_link_libraries(network PRIVATE
+    protobuf::libprotobuf          # Config 模式的 target 名
+    ${Boost_LIBRARIES}
+    ZLIB::ZLIB
+)
+
+# Windows 需要额外链接 winsock
+if(WIN32)
+    target_link_libraries(network PRIVATE ws2_32)
+endif()
+
+# macOS：开发阶段编译当前架构即可，发布时再生成 universal binary
+# 如需 universal binary，取消注释下面两行并安装多架构版本的依赖库
+# if(APPLE)
+#     set_target_properties(network PROPERTIES OSX_ARCHITECTURES "x86_64;arm64")
+# endif()
+
+# ============================================================
+# 编译产物输出路径
+# ============================================================
+set_target_properties(network PROPERTIES
+    LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib
+)

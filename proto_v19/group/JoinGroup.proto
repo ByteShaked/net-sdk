@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package tutorial;
+
+message JoinGroupInner {
+        optional string joiner = 1; //申请加入者
+        optional string groupId= 2; //群组ID
+		optional string declared = 3;//申请加入理由，最长200个字符
+		optional string ext = 4;//扩展字段
+}

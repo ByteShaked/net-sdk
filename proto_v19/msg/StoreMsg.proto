@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package tutorial;
+
+message StoreMsgInner {
+	optional uint32 msgType = 1; //消息类型 1:文本消息 2：语音消息 3：视频消息  4：图片消息  5：位置消息  6：文件 
+	optional string msgId = 2; //消息ID
+	optional bytes msgContent = 3;//文本消息内容
+	optional string msgSender = 4; //发送者账号
+	optional string msgReceiver = 5;//接收者账号
+	optional string msgDomain = 6; //需要扩展的消息字段放在这里
+	optional string msgFileName = 7; //消息文件名
+	optional uint32 msgCompressLen = 8; //本文消息的源长度，如果消息内容经过压缩该字段大于0
+	optional bytes msgData = 9; //语音数据 注意：为了保持跟发送文本的一致体验，把60s语音当做特殊文本，必须经过压缩（小于60K），才允许使用该字段。
+	optional string msgFileSize = 10; // 文件大小(字节)
+	optional string msgLocalName = 11; //服务器生成的文件名
+}

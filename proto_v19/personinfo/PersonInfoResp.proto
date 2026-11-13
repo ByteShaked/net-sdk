@@ -1,0 +1,12 @@
+option java_package = "com.yuntongxun.auth.core.protobuf";
+//option optimize_for = LITE_RUNTIME;;
+
+message PersonInfoRespInner {
+  optional uint64 version = 1; // 资料版本号
+	optional string nickName = 2; // 用户昵称
+	optional uint32 sex = 3; // 性别  1:男  2：女
+  optional string birth = 4; // 生日  格式 2015-12-31
+	optional string sign = 5; // 个人签名
+  optional string region = 6; // 地区  最大字数32个汉字
+  optional string phoneNum = 7; // 电话  最大字数16个汉字
+}

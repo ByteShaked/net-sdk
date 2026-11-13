@@ -1,23 +1,14 @@
 #include "NetworkModule.h"
-#include <arpa/inet.h>
-#include <unistd.h>
-#include "proto_x86_v19/msg2lite.pb.h"
 #include <iostream>
 #include <boost/asio.hpp>
 #include <boost/asio/ip/tcp.hpp>
 #include "common.h"
-#include <hilog/log.h>
-
-
-#undef LOG_DOMAIN 
-#undef LOG_TAG 
-#define LOG_DOMAIN 0x3200 // 全局domain宏，标识业务领域 
-#define LOG_TAG "MY_TAG"  // 全局tag宏，标识模块日志tag
+#include "net_log_macro.h"
 
 namespace tutorial {
 
     NetworkModule::~NetworkModule() {
-        OH_LOG_INFO(LOG_APP, "~NetworkModule() called, disconnecting...");
+        NET_LOG_INFO("~NetworkModule() called, disconnecting...");
         destroy();
     }
     void NetworkModule::startReconnectManager() {
@@ -46,7 +37,7 @@ namespace tutorial {
         std::lock_guard<std::mutex> lock(state_mutex_);
         
         if (connection_state_ != ConnectionState::DISCONNECTED) {
-            OH_LOG_WARN(LOG_APP, "Connect called in invalid state: %d", static_cast<int>(connection_state_));
+            NET_LOG_WARN("Connect called in invalid state: %d", static_cast<int>(connection_state_));
             return false;
         }       
         // 保存连接参数
@@ -57,7 +48,7 @@ namespace tutorial {
         current_retry_count_ = 0;
         auto_reconnect_ = options.auto_reconnect;
         setHeartbeatInterval(options.heartbeat_interval_sec);
-        OH_LOG_INFO(LOG_APP, "Connecting to [%{public}s]:[%{public}d] with [%{public}d] retries ([%{public}d] s interval), heartbeat [%{public}d]s",
+        NET_LOG_INFO("Connecting to [%s]:[%d] with [%d] retries ([%d] s interval), heartbeat [%d]s",
                     last_host_.c_str(), last_port_, max_retry_count_, retry_interval_sec_, options.heartbeat_interval_sec);
         connection_state_ = ConnectionState::CONNECTING;
         try_connect();  
@@ -66,77 +57,46 @@ namespace tutorial {
     bool NetworkModule::try_connect() {
         try {
            printf("ip: [%s] port:[%d]\n",last_host_.c_str(), last_port_);
-           OH_LOG_INFO(LOG_APP, "Net host:  [%{public}s]",last_host_.c_str());
-           OH_LOG_INFO(LOG_APP, "Net port:  [%{public}d]", last_port_);
-        //    network_log::Logger::Write(network_log::LogLevel::INFO, "ip: [%s] port:[%d]\n",host.c_str(), port);
-            
-            // 解析域名
-            boost::asio::io_service io_service;
+           NET_LOG_INFO("Net host:  [%s]",last_host_.c_str());
+           NET_LOG_INFO("Net port:  [%d]", last_port_);
+
+            // DNS 解析 + 建立连接（新版 Boost.Asio API，跨平台）
+            boost::asio::io_context io_ctx;
             boost::system::error_code ec;
-            boost::asio::ip::tcp::resolver resolver(io_service);
-            boost::asio::ip::tcp::resolver::query query(boost::asio::ip::tcp::v4(),last_host_, std::to_string(last_port_));
-            auto endpoints = resolver.resolve(query,ec);
+            boost::asio::ip::tcp::resolver resolver(io_ctx);
+            auto endpoints = resolver.resolve(last_host_, std::to_string(last_port_), ec);
             if (ec) {
                 notify_error(NETWORK_ERR_DNS_RESOLUTION_FAILED, "DNS解析失败: " + ec.message());
                 return false;
             }
-                
-            // 创建socket
-            int sock = socket(AF_INET, SOCK_STREAM, 0);
-            if (sock < 0) {
-                notify_error(NETWORK_ERR_SOCKET_CREATION_FAILED, "Socket creation failed");
-                return false;
-            }
-            int flag = 1;
-            if (setsockopt(sock, IPPROTO_TCP, TCP_NODELAY, (const char *)&flag, sizeof(int))) {
-                notify_error(NETWORK_ERR_SOCKET_OPTION_FAILED, "Set socket option failed");
-                close(sock);
+
+            // 创建 Boost socket，尝试连接所有解析到的地址
+            boost::asio::ip::tcp::socket boost_sock(io_ctx);
+            boost::asio::connect(boost_sock, endpoints, ec);
+            if (ec) {
+                NET_LOG_INFO("Failed to connect: [%s]", ec.message().c_str());
+                notify_error(NETWORK_ERR_CONNECTION_FAILED, "Connection failed: " + ec.message());
                 return false;
             }
 
-            // 设置连接超时
-            struct timeval timeout;
-            timeout.tv_sec = 5;  // 5秒连接超时
-            timeout.tv_usec = 0;
-            setsockopt(sock, SOL_SOCKET, SO_SNDTIMEO, &timeout, sizeof(timeout));
-            setsockopt(sock, SOL_SOCKET, SO_RCVTIMEO, &timeout, sizeof(timeout));
+            NET_LOG_INFO("Connected to [%s]:[%d]", last_host_.c_str(), last_port_);
 
-            // 尝试连接所有解析到的地址
-            auto endpoint = *endpoints;
-            sockaddr_in serv_addr{};
-            serv_addr.sin_family = AF_INET;
-            serv_addr.sin_port = htons(last_port_);
+            // 设置 TCP_NODELAY（禁用 Nagle 算法，降低延迟）
+            boost_sock.set_option(boost::asio::ip::tcp::no_delay(true), ec);
 
-            if (endpoint.endpoint().address().is_v4()) {
-                serv_addr.sin_addr.s_addr = 
-                    boost::asio::detail::socket_ops::host_to_network_long(
-                        endpoint.endpoint().address().to_v4().to_ulong());
-                        auto addr = endpoint.endpoint().address();
-                        OH_LOG_INFO(LOG_APP, "Trying IP: [%{public}s]", 
-                                    addr.to_string().c_str());
-                        // printf("connect ip is : %s \n",addr.c_str());
-                if (::connect(sock, (sockaddr*)&serv_addr, sizeof(serv_addr)) == 0) {
-                    OH_LOG_INFO(LOG_APP, "Connected to IP: [%{public}s]", 
-                                addr.to_string().c_str());
-                    last_host_ = addr.to_string();
-                    // 更新socket
-                    {
-                        std::lock_guard<std::mutex> lock(socket_mutex_);
-                        if (sockfd_ != -1) close(sockfd_);
-                        sockfd_ = sock;
-                    }
+            // 取出原生 fd，后续收发仍用原生 socket API（跨平台）
+            {
+                std::lock_guard<std::mutex> lock(socket_mutex_);
+                if (sockfd_ != -1) {
+#ifdef _WIN32
+                    closesocket(sockfd_);
+#else
+                    close(sockfd_);
+#endif
                 }
-                else
-                {
-                    OH_LOG_INFO(LOG_APP, "Failed to connect to IP: [%{public}s]", 
-                                addr.to_string().c_str());
-                    notify_error(NETWORK_ERR_CONNECTION_FAILED, "Connection to all resolved addresses failed");
-                    close(sock);
-                    return false;
-                }
-    
+                sockfd_ = (int)boost_sock.release();
             }
-            // OH_LOG_INFO(LOG_APP, "connection_state_: [%{public}d]", 
+            // NET_LOG_INFO("connection_state_: [%d]", 
             //                    connection_state_);
             // // 更新连接状态
             {
@@ -146,7 +106,7 @@ namespace tutorial {
             }
             // 启动工作线程
             if (receive_thread_running_) {
-                OH_LOG_WARN(LOG_APP, "Receive thread already running, skip startWorkerThreads");
+                NET_LOG_WARN("Receive thread already running, skip startWorkerThreads");
             } else {
                 startWorkerThreads();
             }
@@ -218,7 +178,11 @@ namespace tutorial {
         {
             std::lock_guard<std::mutex> lock(socket_mutex_);
             if (sockfd_ != -1) {
+#ifdef _WIN32
+                closesocket(sockfd_);
+#else
                 close(sockfd_);
+#endif
                 sockfd_ = -1;
             }
         }
@@ -232,12 +196,12 @@ namespace tutorial {
             
             if (connection_state_ == ConnectionState::RECONNECTING) 
             {
-                OH_LOG_INFO(LOG_APP, "Reconnect skipped, invalid state: [%{public}d]", 
+                NET_LOG_INFO("Reconnect skipped, invalid state: [%d]", 
                         static_cast<int>(connection_state_));
                 return false;
             }
             
-            OH_LOG_INFO(LOG_APP, "Starting reconnect to [%{public}s]:[%{public}d]", 
+            NET_LOG_INFO("Starting reconnect to [%s]:[%d]", 
                     last_host_.c_str(), last_port_);
             
             // 更新状态
@@ -254,18 +218,18 @@ namespace tutorial {
                 if (is_destroying_) return false;
                 // 检查是否需要继续重连
                 { 
-                    OH_LOG_INFO(LOG_APP, "Reconnect start");
+                    NET_LOG_INFO("Reconnect start");
                     std::lock_guard<std::mutex> lock(state_mutex_);
                     if (connection_state_ != ConnectionState::RECONNECTING) {
-                        OH_LOG_INFO(LOG_APP, "Reconnect aborted. State changed to: [%{public}d]", 
+                        NET_LOG_INFO("Reconnect aborted. State changed to: [%d]", 
                                 static_cast<int>(connection_state_));
                         return false; // 状态改变时退出循环
                     }
                 }                
-                OH_LOG_INFO(LOG_APP, "Reconnect attempt [%{public}d][%{public}d]", current_retry_count_ + 1, max_retry_count_);
+                NET_LOG_INFO("Reconnect attempt [%d][%d]", current_retry_count_ + 1, max_retry_count_);
                 
                 if (try_connect()) {
-                    OH_LOG_INFO(LOG_APP, "Reconnect successful");
+                    NET_LOG_INFO("Reconnect successful");
                     return true;
                 }
             }
@@ -334,7 +298,7 @@ namespace tutorial {
                 notify_error(NETWORK_ERR_SOCKET_INVALID, "Invalid socket in heartbeat");
                 return;
             }
-            // OH_LOG_INFO(LOG_APP, "raw_data:  [%{public}d]",raw_data.size());
+            // NET_LOG_INFO("raw_data:  [%d]",raw_data.size());
             send_ok = (send(sockfd_, raw_data.data(), raw_data.size(), 0) >= 0);
         }
 
@@ -351,7 +315,7 @@ namespace tutorial {
             std::unique_lock<std::mutex> cv_lock(cv_mutex_);
             confirmed = response_cv_.wait_for(cv_lock, std::chrono::seconds(10), [this, current_no] {
                 // if (stop_threads_ || disconnected_) {
-                //  OH_LOG_INFO(LOG_APP, "wait_for:  [%{public}s]","connection is closed or stopped");
+                //  NET_LOG_INFO("wait_for:  [%s]","connection is closed or stopped");
                 //     return true; // 立即唤醒
                 // }
                 return pending_messages_.find(current_no) == pending_messages_.end();
@@ -384,7 +348,7 @@ namespace tutorial {
                 return;
             }
             
-            OH_LOG_INFO(LOG_APP, "Disconnecting... [%{public}d]", 
+            NET_LOG_INFO("Disconnecting... [%d]", 
                         static_cast<int>(connection_state_));
             
             // 更新状态
@@ -442,7 +406,7 @@ namespace tutorial {
 
         int ret = send(sockfd_, heartbeat.data(), heartbeat.size(), 0);
         if (ret < 0) {
-            OH_LOG_INFO(LOG_APP, "Heartbeat failed after reconnect");
+            NET_LOG_INFO("Heartbeat failed after reconnect");
             notify_error(NETWORK_ERR_HEARTBEAT_FAILED, "Heartbeat failed after reconnect");
             return false;
         }
@@ -467,7 +431,7 @@ namespace tutorial {
         // if (heartbeat_thread_.joinable()) {
         //     // 等待线程结束
         //     heartbeat_thread_.join();
-        //     OH_LOG_INFO(LOG_APP, "Heartbeat thread stopped");
+        //     NET_LOG_INFO("Heartbeat thread stopped");
         // }
     }
     void NetworkModule::setHeartbeatInterval(int seconds) {  // 设置心跳间隔
@@ -475,7 +439,7 @@ namespace tutorial {
     }    
     void NetworkModule::sendHeartbeat() {
         const std::vector<uint8_t> heartbeat{0x00, 0x00};
-        OH_LOG_INFO(LOG_APP, "Heartbeat thread join start !");
+        NET_LOG_INFO("Heartbeat thread join start !");
         while (heartbeat_enabled_ && !stop_threads_  && !is_destroying_) {
             std::this_thread::sleep_for(std::chrono::seconds(heartbeat_interval_sec_));
             if (stop_threads_) break;
@@ -495,13 +459,13 @@ namespace tutorial {
     }
     void NetworkModule::receiveLoop() {
         std::vector<uint8_t> buffer;
-        OH_LOG_INFO(LOG_APP, "receiveLoop thread join start !");
+        NET_LOG_INFO("receiveLoop thread join start !");
         while (!stop_threads_ && !is_destroying_) {
             // 检查连接状态
             {
                 std::lock_guard<std::mutex> lock(state_mutex_);
                 if (connection_state_ == ConnectionState::RECONNECTING) {
-                    OH_LOG_INFO(LOG_APP, "Receive thread exiting, not connected");
+                    NET_LOG_INFO("Receive thread exiting, not connected");
                     break;
                 }
             }
@@ -515,7 +479,7 @@ namespace tutorial {
             uint8_t temp[1024];
             size_t bytes = recv(sockfd_, temp, sizeof(temp), 0);
             if (bytes == 0) {
-                OH_LOG_INFO(LOG_APP, "Connection closed by peer");
+                NET_LOG_INFO("Connection closed by peer");
                 bool need_reconnect = false;
                 {
                     std::lock_guard<std::mutex> lock(state_mutex_);
@@ -538,7 +502,7 @@ namespace tutorial {
                 }
             } else if (bytes < 0) {
                 if (errno == EINTR || errno == EAGAIN) continue;
-                OH_LOG_ERROR(LOG_APP, "Receive error: %d", errno);
+                NET_LOG_ERROR("Receive error: %d", errno);
                 bool need_reconnect = false;
                 {
                     std::lock_guard<std::mutex> lock(state_mutex_);
@@ -557,7 +521,7 @@ namespace tutorial {
                  break;
             }
             if (bytes == 2 && temp[0] == 0x00 && temp[1] == 0x00) {
-                OH_LOG_INFO(LOG_APP, "Net Received heartbeat packet, ignore.");
+                NET_LOG_INFO("Net Received heartbeat packet, ignore.");
                 break;
             }
             // 将数据加入缓冲区
@@ -575,7 +539,7 @@ namespace tutorial {
                     int tlv_error_code = 0;
                     //暂时去除包头包尾格式校验报错回调
                     // notify_error(tlv_error_code, error_msg);
-                    OH_LOG_INFO(LOG_APP, "Net tlv_error_code:  [%{public}s]",error_msg.c_str());
+                    NET_LOG_INFO("Net tlv_error_code:  [%s]",error_msg.c_str());
                 }
                 {
                     tutorial::Person person;
@@ -583,8 +547,8 @@ namespace tutorial {
                     if (person.ParseFromString(serialized_str)) {
                         uint32_t received_no = person.protoclientno();
                         std::cout << "protoclientno: " << person.protoclientno() << std::endl;
-                        OH_LOG_INFO(LOG_APP, "Net  received_no:  [%{public}d][%{public}zu]",received_no,pending_messages_.size());
-                        OH_LOG_INFO(LOG_APP, "Net  prototype:  [%{public}d]",person.prototype());                        
+                        NET_LOG_INFO("Net  received_no:  [%d][%zu]",received_no,pending_messages_.size());
+                        NET_LOG_INFO("Net  prototype:  [%d]",person.prototype());                        
                         bool is_pending = false;
                         // 检查protoclientno是否在pending_messages_中
                         //（属于服务器下发通知处理（如果received_no在clinetno（pending_messages_）中没找到，或者received_no为0））
@@ -625,9 +589,9 @@ namespace tutorial {
                 error_callback_(code, msg);
             }
         }catch (const std::exception& e) {
-            OH_LOG_ERROR(LOG_APP, "Error in notify_error: %s", e.what());
+            NET_LOG_ERROR("Error in notify_error: %s", e.what());
         } catch (...) {
-            OH_LOG_ERROR(LOG_APP, "Unknown error in notify_error");
+            NET_LOG_ERROR("Unknown error in notify_error");
         }
     }
     void NetworkModule::notify_state(ConnectionState state, const std::string& msg) {

@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package tutorial;
+
+message QueryGroupMemberCardInner{
+	optional string memberId = 1;//成员id
+	optional string belong = 2;//群组id
+}

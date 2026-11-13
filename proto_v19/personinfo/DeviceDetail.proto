@@ -1,0 +1,15 @@
+option java_package = "com.yuntongxun.auth.core.protobuf";
+//option optimize_for = LITE_RUNTIME;;
+
+message DeviceDetailInner
+{
+	optional string imei			= 1;	//用户手机的imei号码
+	optional uint32 deviceType		= 2;	//终端类型 1: Android Phone 2: iPhone  10: iPad  11: Android Pad  20: PC  (Just Allowed phone 2 PC(Pad) login)
+	optional string deviceAgent		= 3;	//厂商+设备类型
+	optional string macAddr			= 4;	// 本地mac地址
+	optional string imsi			= 5;	//用户手机的imsi号码
+	optional string phonenum		= 6;	//用户手机号码	
+	optional string deviceToken		= 7;	//iOS获取用于apns推送
+	optional uint32 latitude		= 8;	// 纬度 获取到的数字*1000
+	optional uint32 longitude		= 9;	// 经度 获取到的数字*1000
+}

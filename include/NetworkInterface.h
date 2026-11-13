@@ -1,8 +1,7 @@
 #pragma once
 #include <functional>
 #include <vector>
-#include "proto_x86_v19/msg2lite.pb.h"
-#include "NetworkInterface.h"
+#include "TlvHandler.h"  // 包含 MsgLite.pb.h 和 Person 别名
 
 namespace tutorial {
     enum class ProtocolType {

@@ -1,0 +1,147 @@
+syntax = "proto3";
+
+package tutorial;
+
+enum CallEventInner {
+    CallEvt_Invite=0;
+    CallEvt_180Ring=2;
+    CallEvt_183Processing=3;
+    CallEvt_200OK=4;
+    CallEvt_202Accept=5;
+    CallEvt_ACK=6;
+    CallEvt_BYE=7;
+    CallEvt_Cancel=8;
+    CallEvt_Refer=9;
+    CallEvt_Refuse=10;  //使用cause参数回复4xx、5xx、6xx
+    CallEvt_Info=11;
+    CallEvt_Message=12;
+    CallEvt_100Try=13;
+    CallEvt_DigHole=14; //p2p打洞消息
+    CallEvt_Ping=15;    //呼叫检测
+    CallEvt_pingAck=16; //检测响应
+    CallEvt_FloorRequest=17; 
+    CallEvt_FloorRelease=18; 
+    CallEvt_FloorStatusNotify=19; 
+    CallEvt_NewSwitch = 20;//tcp重连上报 
+    CallEvt_PreInvite = 21;//预呼叫
+    CallEvt_Continue = 22;
+    CallEvt_WXReqVideo = 23;
+    CallEvt_WXReqVideoAck = 24;
+    CallEvt_WXCancelVideo = 25;
+    CallEvt_WXCancelVideoAck = 26;
+    CallEvt_DTMF = 27;
+    CallEvt_Report = 28;
+    CallEvt_MediaTimeOut = 29;
+    CallEvt_ChangeConf = 30;
+    CallEvt_ChangeConfAck = 31;    
+    CallEvt_WXAVSync = 32;
+    CallEvt_WXAVSyncAck = 33;
+    CallEvt_WXCancelAVSync = 34;
+    CallEvt_WXCancelAVSyncAck = 35;
+    CallEvt_PRACK = 36;
+    CallEvt_Update = 37;
+    CallEvt_ReqVideo = 38;
+    CallEvt_ReqVideoAck = 39;
+    CallEvt_CancelVideo = 40;
+    CallEvt_CancelVideoAck = 41;
+    CallEvt_PublishMediaRequest = 42;
+    CallEvt_PublishMediaResponse = 43;
+    CallEvt_UnPublishMediaRequest = 44;
+    CallEvt_UnPublishMediaResponse = 45;
+    CallEvt_WXReqKeyFrame = 46;
+    CallEvt_WXReqKeyFrameAck = 47;
+    CallEvt_PublishMediaResponseAck = 48;
+}
+
+message MediaDesNameAddrInner{                  //媒体描述名称地址
+	optional string mediaType = 1;
+	optional string mediaPort = 2;
+	optional string mediaProtocol=3;
+
+	message MediaFormatInner{                       //媒体格式定义
+	optional string formatContent = 1;
+	}
+	optional MediaFormatInner mediaFormat=4;
+	optional uint32 mediaSubType=5;
+}
+
+
+
+message ConnInfoInner{                          //连接信息定义
+	optional string connNetType = 1;
+	optional string connAddrType = 2;
+	optional string connAddr=3;
+}
+
+message MediaAttrInner{                          //媒体属性定义
+	optional string mediaAttrFielName = 1;
+	optional int32  mdeiaFormat = 2;
+	optional string MIMEType = 3;
+	optional uint32 sampleRate = 4;
+	optional string mediaAttrValue=5;
+}
+
+message OwnerCreatorInner{                          //媒体属性定义
+	optional uint32 sessionId   = 1;
+	optional uint32 sessionVer  = 2;
+	optional string connAddr=3;
+	optional string connNetType = 4;
+	optional string connAddrType = 5;
+	optional string sessionName = 6;
+
+}
+
+message SDPVideoChanDataInner{                //SDP视频信息
+	optional MediaDesNameAddrInner videoMediaDesnameAddr = 1;
+	optional ConnInfoInner connInfoVideo = 2;
+	optional MediaAttrInner videoMediaAttribute=3;
+}
+
+
+message SessionDesProtocolInner{                //会话描述协议
+  optional OwnerCreatorInner ownerCre = 1;
+	optional ConnInfoInner connInfo = 2;
+	optional MediaDesNameAddrInner audioMediaDesnameAddr = 3;
+	optional ConnInfoInner connInfoAudio = 4;
+	optional MediaAttrInner audioMediaAttribute=5;
+	optional MediaDesNameAddrInner videoMediaDesnameAddr = 6;
+	optional ConnInfoInner connInfoVideo = 7;
+	optional MediaAttrInner videoMediaAttribute=8;
+	optional SDPVideoChanDataInner videoChanAttribute=9;
+}
+
+message CallEventDataInner{
+	optional uint32 callEvent=1;
+	optional string callId=2;//会话id
+	optional uint32 isVoipCall=3;//是否音视频
+	optional uint32 callType=4;
+	optional string called=5;//被叫号码
+	optional string origCalled=6;
+	optional string caller=7;//主叫号码
+	optional string disnumber=8;
+	optional SessionDesProtocolInner SDP=9;
+	optional string cause=10;//原因值
+	optional string dtmf=11;
+	optional string protoSource = 12;  //用于存放生产者源地址
+	optional string userData=13; //用户自定义数据
+	optional string ccpCustomData=14; //用于传输平台的自定义数据
+	optional uint32 protoClientNo= 15;  //用于存放客户端流水号
+	optional string protoBackExp = 16;  //用于存放后台模块的扩展信息
+	optional string strSDP=17;
+	optional uint32 isBfcp=18;
+	optional string tranferInfo=19;//中转信息
+	optional uint32 pingType=20;
+	optional uint32 isThird=21;     
+	optional uint32 isTel=22;
+	optional string toThird=23;
+	optional string confId=24;
+	optional string seq=25;//消息序列号
+	optional uint32 isReInvite=26;
+	optional string fromThird=27;
+	optional string Supported=28;
+	optional string Require=29;	
+	optional uint32 Rseq=30;
+	optional uint32 Min_SE=31;
+	optional string Session_Expires=32;
+	
+}

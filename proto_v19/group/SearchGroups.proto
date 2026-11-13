@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package tutorial;
+
+message SearchGroupsInner{
+	optional string asker = 1; // 请求者
+	optional uint32 searchType = 2;// 搜索类型 1: 群组ID  2：群组名称 
+	optional string keywords = 3; // 搜索关键词
+	optional uint32 pageNo = 4; // 分页参数，群组名称搜索时,第几页数据 默认为1
+	optional uint32 pageSize = 5; // 分页参数，群组名称搜索时,每页数据条数，默认为10
+}

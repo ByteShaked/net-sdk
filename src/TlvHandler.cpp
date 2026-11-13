@@ -1,11 +1,7 @@
 #include "TlvHandler.h"
 #include <stdexcept>
 #include "common.h"
-#include <hilog/log.h>
-#undef LOG_DOMAIN 
-#undef LOG_TAG 
-#define LOG_DOMAIN 0x3200 // 全局domain宏，标识业务领域 
-#define LOG_TAG "MY_TAG"  // 全局tag宏，标识模块日志tag
+#include "net_log_macro.h"
 namespace tlv {
 
     // Varint编码
@@ -125,7 +121,7 @@ namespace tlv {
         size_t pos = 0;
         size_t size = buffer.size();
         // if (buffer[0] == 0x00 && buffer[1] == 0x00) {
-        //     OH_LOG_INFO(LOG_APP, "Heartbeat packet");
+        //     NET_LOG_INFO("Heartbeat packet");
         //     return std::make_tuple(pos, buffer, "Heartbeat packet");
         // }
         // 检查MagicCode
@@ -137,7 +133,7 @@ namespace tlv {
         // 解码Length
         auto varint_result = decode_varint(buffer, pos);
         if (varint_result.second == 0) {
-            OH_LOG_INFO(LOG_APP, "Net Invalid Varint");
+            NET_LOG_INFO("Net Invalid Varint");
             return std::make_tuple(pos, buffer, "Invalid Varint");
         }
         uint32_t length = varint_result.first;
@@ -145,7 +141,7 @@ namespace tlv {
 
         // 检查Body是否越界
         if (pos + length > size) {
-            OH_LOG_INFO(LOG_APP, "Net Body length exceeds buffer size");
+            NET_LOG_INFO("Net Body length exceeds buffer size");
             return std::make_tuple(pos, buffer, "Body length exceeds buffer size");
         }
 

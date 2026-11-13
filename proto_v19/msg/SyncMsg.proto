@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package tutorial;
+
+message SyncMsgInner{
+	optional string version = 1;//本地消息版本号（支持一次请求中带多个版本号，中间用逗号分隔，服务器决定给1个还是多个）
+	optional uint32 type = 2;   //消息类型	不传则获取所有类型消息;	1-普通消息类型(包含群组消息);	2-群组管理类消息类型;
+	optional string groupId = 3;//群id，群消息同步时传入
+}

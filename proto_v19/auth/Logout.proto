@@ -1,0 +1,6 @@
+syntax = "proto3";
+
+package tutorial;
+message LogoutInner {
+	optional string deviceNo= 1;  // 用户设备号
+}

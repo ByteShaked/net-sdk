@@ -1,0 +1,7 @@
+option java_package = "com.yuntongxun.auth.core.protobuf";
+//option optimize_for = LITE_RUNTIME;;
+
+message SetPushDetailInner
+{
+	optional uint32 pushDetail = 1;	//是否显示推送消息详情，0不显示 1显示
+}

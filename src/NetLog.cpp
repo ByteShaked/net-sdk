@@ -4,13 +4,7 @@
 #include <chrono>
 #include <iomanip>
 #include <sstream>
-#include <hilog/log.h>
 #include <stdarg.h>
-
-#undef LOG_DOMAIN 
-#undef LOG_TAG 
-#define LOG_DOMAIN 0x3200 // 全局domain宏，标识业务领域 
-#define LOG_TAG "MY_TAG"  // 全局tag宏，标识模块日志tag
 namespace network_log {
 
 class Logger::Impl {
@@ -61,14 +55,12 @@ private:
             mkdir(path.c_str(), 0755);
             #endif
         }
-        OH_LOG_INFO(LOG_APP, "path:  [%{public}s]", path.c_str());
     }
 
     std::string generate_filename() {
         std::time_t t = std::time(nullptr);
         char time_str[20];
         std::strftime(time_str, sizeof(time_str), "%Y%m%d_%H%M%S", std::localtime(&t));
-         OH_LOG_INFO(LOG_APP, "log_dir_:  [%{public}s]", log_dir_.c_str());
         return log_dir_ + "/network_" + time_str + ".log";
     }
 

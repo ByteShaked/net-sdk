@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package tutorial;
+
+message MsgOperationInner{
+	optional string version = 1;//接收者消息版本号
+	optional string msgid = 2;//发送者msgId
+	optional uint32 type = 3; //空：阅后即焚，1：消息撤回，2：消息送达，3：消息已读
+	optional string groupId = 4; // 群组id，用于撤回群消息
+}

@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package tutorial;
+
+message UserAuthInner {
+  optional uint32 authType = 1;// [default = 1]; //认证类型 1：完整认证 2：简化认证（一定时间内有效） 3、密码认证登录（带appkey，pwd，不需要sig字段）4: 临时token  5: 临时密码（类型3的扩展）
+	optional string appId = 2; //应用ID 32位
+	optional string userName= 3; //用户自定义账号（最大支持32位）
+	optional string timestamp=4; //时间戳（格式yyyyMMddHHmmss）
+	optional uint32 device=5; //终端类型 1: Android Phone 2: iPhone  10: iPad  11: Android Pad  20: windows PC  21:H5  22:Mac(Just Allowed phone 2 PC(Pad) login)
+	optional string sig= 6; //MD5(appId+username+timestamp+token)
+	optional string sdkVersion= 7; //SDK版本号 4.0.0
+	optional string imei= 8; //终端生成的设备唯一号(Android采用IMEI    IOS设备采用自定义规则)
+	optional uint32 mode=9; //用于踢出功能 1: 用户输入密码登录(用于踢出别的设备，应用传入1，底层成功后，重连时需要改成 2) 2：自动登录(服务器处理自己是否踢出逻辑，应用传入2，底层重连一直使用2)
+	optional uint32 network=10; // 1: WIFI 2: 4G  3: 3G  4: 2G(EDGE) 5: INTERNET  6: other
+	optional string pwd=11; // 密码字段（用户VoIP账号密码登陆）
+	optional string bundleid=12;//本地应用ID
+	optional string subDevice=13;//设备子类型  {厂商};{型号};{固件版本号}  huawei;mate7;5.0
+  	optional string language=14;//当前设备语言，语言_地区  如zh_CN 中文_中国
+  	optional string atmId=15;//柜员机唯一标识
+  	optional string clientIp=16;//客户端ip
+  	optional string extOpts=17;//平台业务扩展字段
+}

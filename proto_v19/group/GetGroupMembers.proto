@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package tutorial;
+
+message GetGroupMembersInner{
+	optional string groupId = 1; //群组id
+	optional string asker = 2;
+	optional string memAcc = 3; //获取非第一页数据时需要上传最新或最后条数据的useracc
+	optional uint32 pageSize = 4; //分页大小 默认50条 -1获取全部
+}

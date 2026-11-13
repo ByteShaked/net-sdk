@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package tutorial;
+
+message GetOwnerGroupsInner{
+	optional string asker = 1;//请求者
+	optional string groupId = 2;//获取非第一页数据时需要上传最新或最后条数据的groupId
+	optional uint32 pageSize = 3;////分页大小 默认50条 -1获取全部
+	optional uint32 target = 4;  //群组业务模式 缺省不传该值表示群组模式  1：讨论组模式 2：群组模式 125：所有群组
+}

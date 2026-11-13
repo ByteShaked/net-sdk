@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package tutorial;
+
+message CreateGroupInner {
+        optional string creator = 1; //创建者
+        optional string groupName = 2; //群组名字(最大20个字符)
+	optional uint32 type = 3; //群组类型 （同学、朋友、同事等）1: 同学  2: 朋友 3: 同事
+        optional string province= 4; //群组省份
+	optional string city= 5; //群组地区
+	optional uint32 scope = 6; // // 群组规模 1：临时组(上限100人) 2普通组(上限300人)3：普通组(上限500人) 4：付费普通组 (上限1000人) 5：付费VIP组（上限2000人）
+	optional string declared = 7;//群组公告，最长200个字符
+	optional uint32 permission = 8; //群组权限 1：默认可直接加入  2：需要身份验证    3:私有群组（不能主动加入，仅能管理员邀请）
+	optional uint32 mode = 9;  //创建者退出，群组是否解散?  1: 不解散 2: 解散
+	optional string groupDomain = 10;  //群组扩展信息（用于第三方应用传递自己的数据）
+	optional uint32 target = 11;  //群组业务模式 缺省不传该值表示群组模式  1：讨论组模式 2：群组模式
+	optional uint32 isForbid  = 12; //群组禁言属性，1:非禁言 2：禁言 缺省1 ，该字段外汇项目使用，基线版本不使用。
+	optional uint32 isManage = 13; //是否仅群主和管理员可管理群 1:否 2:是 缺省1
+	optional uint32 isAtAll = 14; //是否仅群主和管理员可@所有人 1:否 2:是 缺省1
+	optional uint32 inviteOperation = 15; //普通成员是否可拉人入群 1:是   2:否 缺省1
+	optional uint32 checkAdminFlag = 16; //入群是否需要群主与管理员审核 1:是   2:否 缺省2
+	optional uint32 pushQuitGroupMsg = 17; //是否开启推送退群通知 1:是   2:否 缺省2
+}
+

@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package tutorial;
+
+message SendMsgRespInner{
+	optional string token = 1;//附件上传token
+	optional string url = 2;//附件上传地址(绝对地址或相对地址)
+}

@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package tutorial;
+
+message ConfirmJoinGroupInner{
+	optional string acker = 1;// 回复人
+	optional string groupId = 2;// 群组id
+	optional string memberId = 3;// 成员id
+	optional uint32 confirm = 4;// 1:不同意  2:同意
+	repeated ConfirmJoinGroupInnerMembers memberIds=5; //成员id集合，用于批量审核使用，memberIds不为空时memberId无效
+	optional string ext = 6; //扩展字段，中汇使用，用于传requestId,用来实现消息盒子功能，关联审核与申请的IM消息
+}
+
+message ConfirmJoinGroupInnerMembers{
+	optional string memberId = 1;// 成员id
+}

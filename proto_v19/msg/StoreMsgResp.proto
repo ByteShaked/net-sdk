@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package tutorial;
+
+message StoreMsgRespInner {
+	repeated StoreInfo storeInfo = 1; //存储的信息 
+}
+
+message StoreInfo {
+	optional string receiver = 1; //接收者
+	optional uint64 version = 2; //消息版本号
+}

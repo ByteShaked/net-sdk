@@ -1,22 +1,18 @@
-// NetworkModule.h
 #pragma once
 #include "NetworkInterface.h"
+#include "net_log_macro.h"
 #include <vector>
 #include <thread>
 #include <atomic>
 #include <mutex>
 #include <condition_variable>
-#include <arpa/inet.h>
-#include <unistd.h>
 #include <tuple>
 #include <string>
 #include <algorithm>
-#include "proto_x86_v19/msg2lite.pb.h"
-#include "TlvHandler.h"
 #include <map>
+#include <unordered_set>
 #include <chrono>
-#include <pthread.h>
-#include "NetLog.h"
+#include "TlvHandler.h"
 struct PendingMessage {
     std::chrono::steady_clock::time_point send_time;
     std::shared_ptr<std::condition_variable_any> cv;

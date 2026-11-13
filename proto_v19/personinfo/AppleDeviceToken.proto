@@ -1,0 +1,11 @@
+option java_package = "com.yuntongxun.auth.core.protobuf";
+//option optimize_for = LITE_RUNTIME;;
+
+message AppleDeviceTokenInner
+{
+	optional string deviceToken = 1;	//iOS获取用于apns推送（注意：此token是动态生成，需要定期更新）
+	optional string language = 2;//当前设备语言，语言_地区  如zh_CN 中文_中国
+	optional string subDevice=3;//设备子类型  {厂商};{型号};{固件版本号}  huawei;mate7;5.0
+	optional uint32 tokenType=4;//TOKEN类型 用于区分推送证书 缺省为空则为APNS推送，如果为1表示VOIP(PushKit）类型
+	optional string beforeUserAcc = 5;	//之前的用户账号appid#username
+}

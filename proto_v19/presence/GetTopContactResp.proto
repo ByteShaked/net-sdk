@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+package tutorial;
+
+message GetTopContactRespInner {
+	repeated string contacts = 1; //置顶联系人列表
+}

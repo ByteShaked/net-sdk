@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package tutorial;
+
+message GetUserStateRespInner {
+	optional string useracc = 1; //被查询人员的账号
+	optional uint32 network = 2; //被查询人员的网络状态   1: WIFI 2: 4G  3: 3G  4: 2G(EDGE) 5: INTERNET  6: other
+	optional uint32 state = 3; //被查询人员的在线状态   1：在线 2：离线
+	optional uint32 device = 4; //终端类型 1: Android Phone 2: iPhone  10: iPad  11: Android Pad  20: PC  (Just Allowed phone 2 PC(Pad) login)
+	optional uint32 substate = 5; //在线状态子类型，用户根据自己的需求定义所需的类型
+}
+
+message GetMultiUserStateRespInner {
+	repeated GetUserStateRespInner userStateResp = 1; //返回被查询人员的状态
+}

@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package tutorial;
+
+message PublishPresenceRespInner {
+	repeated Friend friend=1;//好友状态 (好友较多时，可以多次推送)
+}
+
+message Friend {
+	optional string useracc=1; // 好友账号
+	optional string nickName=2; // 好友昵称
+	optional uint32 type = 3; //类型 1：在线 2：离线
+	optional uint32 subType = 4; // 在线子类型 1:  请勿打扰  2：离开 3：忙碌 4：隐身
+	optional uint32 network = 5; // 1: WIFI 2: 4G  3: 3G  4: 2G(EDGE) 5: INTERNET  6: other
+	optional string timestamp= 6; //时间戳
+	optional string userdata = 7; // 私有数据
+}

@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package tutorial;
+
+message PushMsgNotifyInner {
+        optional uint64 version = 1; // 版本号 
+        optional string groupId = 2; // 群id
+}

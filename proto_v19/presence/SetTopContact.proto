@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package tutorial;
+
+message SetTopContactInner {
+	optional string contact = 1; //联系人账号或群组id
+	optional uint32 type = 2; // 1 置顶 2 取消置顶
+	repeated string userAccList = 3; //群成员账号(群组解散,群组成员如果有置顶该群,则对每个成员进行取消置顶)
+}
