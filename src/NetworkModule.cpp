@@ -33,13 +33,12 @@ namespace tutorial {
     }
 
     bool NetworkModule::connect(const ConnectOptions& options) {
-       
         std::lock_guard<std::mutex> lock(state_mutex_);
-        
+
         if (connection_state_ != ConnectionState::DISCONNECTED) {
             NET_LOG_WARN("Connect called in invalid state: %d", static_cast<int>(connection_state_));
             return false;
-        }       
+        }
         // 保存连接参数
         last_host_ = options.host;
         last_port_ = options.port;
@@ -51,7 +50,7 @@ namespace tutorial {
         NET_LOG_INFO("Connecting to [%s]:[%d] with [%d] retries ([%d] s interval), heartbeat [%d]s",
                     last_host_.c_str(), last_port_, max_retry_count_, retry_interval_sec_, options.heartbeat_interval_sec);
         connection_state_ = ConnectionState::CONNECTING;
-        try_connect();  
+        try_connect();
         return true;
     }
     bool NetworkModule::try_connect() {
