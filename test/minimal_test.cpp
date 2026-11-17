@@ -17,8 +17,8 @@ int main() {
 
     // 连接本地测试服务器
     ConnectOptionsC options = {};
-    options.host = "127.0.0.1";
-    options.port = 9999;
+    options.host = "223.78.68.146";
+    options.port = 8085;
     options.max_retry_count = 0;
     options.retry_interval_sec = 1;
     options.auto_reconnect = 0;

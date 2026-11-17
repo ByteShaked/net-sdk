@@ -41,7 +41,12 @@ add_definitions(
 # ============================================================
 # 查找依赖（自动适配各平台安装路径）
 # ============================================================
-find_package(Protobuf REQUIRED CONFIG)  # CONFIG 模式，支持 Protobuf_DIR 精确指定版本
+# 使用自编译的 Protobuf 3.19.5，完全匹配 proto_v19 生成代码的版本
+set(CMAKE_PREFIX_PATH "/opt/protobuf-3.19.5" ${CMAKE_PREFIX_PATH})
+set(Protobuf_INCLUDE_DIR "/opt/protobuf-3.19.5/include")
+set(Protobuf_LIBRARIES "/opt/protobuf-3.19.5/lib/libprotobuf.a")
+set(Protobuf_PROTOC_EXECUTABLE "/opt/protobuf-3.19.5/bin/protoc")
+
 find_package(Boost REQUIRED COMPONENTS system)
 find_package(ZLIB REQUIRED)             # protobuf 3.19.x 依赖 zlib
 
@@ -87,7 +92,7 @@ add_library(network SHARED ${NETWORK_SOURCES})
 target_include_directories(network PRIVATE ${NETWORK_INCLUDE_DIRS})
 
 target_link_libraries(network PRIVATE
-    protobuf::libprotobuf          # Config 模式的 target 名
+    ${Protobuf_LIBRARIES}          # 直接链接 Protobuf 3.19.5 静态库
     ${Boost_LIBRARIES}
     ZLIB::ZLIB
 )
