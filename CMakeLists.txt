@@ -42,10 +42,13 @@ add_definitions(
 # 查找依赖（自动适配各平台安装路径）
 # ============================================================
 # 使用自编译的 Protobuf 3.19.5，完全匹配 proto_v19 生成代码的版本
-set(CMAKE_PREFIX_PATH "/opt/protobuf-3.19.5" ${CMAKE_PREFIX_PATH})
-set(Protobuf_INCLUDE_DIR "/opt/protobuf-3.19.5/include")
-set(Protobuf_LIBRARIES "/opt/protobuf-3.19.5/lib/libprotobuf.a")
-set(Protobuf_PROTOC_EXECUTABLE "/opt/protobuf-3.19.5/bin/protoc")
+# 鸿蒙交叉编译时通过 CMake 参数覆盖这些路径
+if(NOT Protobuf_INCLUDE_DIR)
+    set(CMAKE_PREFIX_PATH "/opt/protobuf-3.19.5" ${CMAKE_PREFIX_PATH})
+    set(Protobuf_INCLUDE_DIR "/opt/protobuf-3.19.5/include")
+    set(Protobuf_LIBRARIES "/opt/protobuf-3.19.5/lib/libprotobuf.a")
+    set(Protobuf_PROTOC_EXECUTABLE "/opt/protobuf-3.19.5/bin/protoc")
+endif()
 
 # 查找 Boost（鸿蒙交叉编译时可选）
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux" AND CMAKE_SYSTEM_PROCESSOR STREQUAL "aarch64")
