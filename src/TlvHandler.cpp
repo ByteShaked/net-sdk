@@ -8,14 +8,14 @@ namespace tlv {
     std::vector<uint8_t> TlvHandler::encode_varint(uint32_t value) {
         std::vector<uint8_t> bytes;
         while (value > 0x7F) {  // 如果值大于 7 位
-            bytes.push_back(static_cast<uint8_t>((value & 0x7F) | 0x40));  // 设置最高位为 1
+            bytes.push_back(static_cast<uint8_t>((value & 0x7F) | 0x80));  // ✅ 修正：设置最高位为 1
             value >>= 7;  // 右移 7 位
         }
         bytes.push_back(static_cast<uint8_t>(value));  // 最后一个字节，最高位为 0
         return bytes;
     }
     // Varint 解码函数
-    std::pair<uint32_t, size_t> TlvHandler::decode_varint(const std::vector<uint8_t>& buffer, size_t pos) 
+    std::pair<uint32_t, size_t> TlvHandler::decode_varint(const std::vector<uint8_t>& buffer, size_t pos)
     {
         uint32_t result = 0;
         size_t bytes_read = 0;
@@ -27,9 +27,9 @@ namespace tlv {
                 return std::make_pair(0, 0);
             }
             uint8_t byte = buffer[pos + bytes_read];
-            result |= (byte & 0x6F) << shift;
+            result |= (byte & 0x7F) << shift;  // ✅ 修正：应该是 0x7F
             bytes_read++;
-            if ((byte & 0x80) == 0) {
+            if ((byte & 0x80) == 0) {  // ✅ 检查最高位是否为0
                 break;
             }
             shift += 7;
@@ -56,31 +56,54 @@ namespace tlv {
     Packet TlvHandler::encode(tutorial::Person &MsgLiteInner) {
 
         std::string inner_data = MsgLiteInner.protodata();
+
+        // 调试：打印内层数据大小
+        printf("[DEBUG] Inner data size: %zu bytes\n", inner_data.size());
+        printf("[DEBUG] protoType: %d\n", MsgLiteInner.prototype());
+
         auto inner_varint =encode_varint(inner_data.size());
         //添加内层协议长度
         std::vector<uint8_t> innerDate_vet;
         innerDate_vet.insert(innerDate_vet.end(),inner_varint.begin(), inner_varint.end());
         innerDate_vet.insert(innerDate_vet.end(), inner_data.begin(), inner_data.end());
         MsgLiteInner.set_protoencrypt(innerDate_vet.size());
+
+        // 调试：打印带长度前缀后的大小
+        printf("[DEBUG] Inner data with varint size: %zu bytes\n", innerDate_vet.size());
+
         //将带长度的内层数据存入外层协议的protodata字段
         if (MsgLiteInner.prototype() == 29) {
             std::string secret_key = Cryptos::SECRET_KEY;
             innerDate_vet = Cryptos::toQESEncode(secret_key, innerDate_vet);
-        }        
+        }
         MsgLiteInner.set_protodata(innerDate_vet.data(), innerDate_vet.size());
         // 序列化到字符串
         std::string serialized_str;
         MsgLiteInner.SerializeToString(&serialized_str);
         std::vector<uint8_t> data(serialized_str.begin(), serialized_str.end());
 
+        // 调试：打印外层序列化后的大小
+        printf("[DEBUG] Outer serialized size: %zu bytes\n", data.size());
+
         Packet packet;
         packet.magic = 0x00FF; // 示例MagicCode
-        
+
         // 构造Body: [Varint长度] + [数据]
         auto varint = encode_varint(data.size());
+
+        // 调试：打印 varint
+        printf("[DEBUG] Varint for size %zu: ", data.size());
+        for (auto b : varint) {
+            printf("%02x ", b);
+        }
+        printf("\n");
+
         packet.body.insert(packet.body.end(), varint.begin(), varint.end());
         packet.body.insert(packet.body.end(), data.begin(), data.end());
-        
+
+        // 调试：打印最终包大小
+        printf("[DEBUG] Final packet body size: %zu bytes\n", packet.body.size());
+
         packet.crc = calculate_crc(packet.body);
         return packet;
     }

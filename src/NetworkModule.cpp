@@ -140,7 +140,6 @@ namespace tutorial {
         startHeartbeat();
     }
     void NetworkModule::stopWorkerThreads() {
-        if (stop_threads_) return;
         // 设置停止标志
         stop_threads_ = true;
           // 清空待确认消息并唤醒等待线程
@@ -155,24 +154,22 @@ namespace tutorial {
                 shutdown(sockfd_, SHUT_RDWR);
             }
         }
-        
+
         // 等待接收线程结束
         if (receive_thread_.joinable() && receive_thread_.get_id() != std::this_thread::get_id()) {
+            NET_LOG_INFO("Joining receive thread...");
             receive_thread_.join();
+            NET_LOG_INFO("Receive thread joined");
         }
-        //  else if (receive_thread_.joinable()) {
-        //     receive_thread_.detach();
-        // }
         receive_thread_running_ = false;
-        
+
         // 停止心跳线程
-        stopHeartbeat();
+        heartbeat_enabled_ = false;
         if (heartbeat_thread_.joinable() && heartbeat_thread_.get_id() != std::this_thread::get_id()) {
+            NET_LOG_INFO("Joining heartbeat thread...");
             heartbeat_thread_.join();
-        } 
-        // else if (heartbeat_thread_.joinable()) {
-        //     heartbeat_thread_.detach();
-        // }        
+            NET_LOG_INFO("Heartbeat thread joined");
+        }
         // 关闭socket
         {
             std::lock_guard<std::mutex> lock(socket_mutex_);
@@ -297,6 +294,14 @@ namespace tutorial {
                 notify_error(NETWORK_ERR_SOCKET_INVALID, "Invalid socket in heartbeat");
                 return;
             }
+
+            // 调试：打印发送的前32字节原始数据
+            printf("[DEBUG] Sending %zu bytes, first 32 bytes (hex): ", raw_data.size());
+            for (size_t i = 0; i < std::min(raw_data.size(), size_t(32)); i++) {
+                printf("%02x ", raw_data[i]);
+            }
+            printf("\n");
+
             // NET_LOG_INFO("raw_data:  [%d]",raw_data.size());
             send_ok = (send(sockfd_, raw_data.data(), raw_data.size(), 0) >= 0);
         }
@@ -442,7 +447,9 @@ namespace tutorial {
         while (heartbeat_enabled_ && !stop_threads_  && !is_destroying_) {
             std::this_thread::sleep_for(std::chrono::seconds(heartbeat_interval_sec_));
             if (stop_threads_) break;
-        
+
+            NET_LOG_INFO("Heartbeat: attempting to send...");  // ✅ 添加调试日志
+
             // 发送前再次检查socket有效性
             std::lock_guard<std::mutex> sock_lock(socket_mutex_);
             if (sockfd_ == -1) {
@@ -450,9 +457,16 @@ namespace tutorial {
                 break;
             }
             std::lock_guard<std::mutex> lock(heartbeat_mutex_);
-            if (send(sockfd_, heartbeat.data(), heartbeat.size(), 0) < 0) {
-                notify_error(NETWORK_ERR_HEARTBEAT_FAILED, "Heartbeat failed");
+            int ret = send(sockfd_, heartbeat.data(), heartbeat.size(), 0);
+            if (ret < 0) {
+                char err_msg[256];
+                snprintf(err_msg, sizeof(err_msg), "Heartbeat failed: errno=%d (%s)",
+                        errno, strerror(errno));
+                NET_LOG_INFO("%s", err_msg);
+                notify_error(NETWORK_ERR_HEARTBEAT_FAILED, err_msg);
                 break;
+            } else {
+                NET_LOG_INFO("Heartbeat sent successfully, %d bytes", ret);
             }
         }
     }
@@ -521,12 +535,12 @@ namespace tutorial {
             }
             if (bytes == 2 && temp[0] == 0x00 && temp[1] == 0x00) {
                 NET_LOG_INFO("Net Received heartbeat packet, ignore.");
-                break;
+                continue;  // ✅ 改为 continue，继续接收下一个数据
             }
             // 将数据加入缓冲区
-            buffer.insert(buffer.end(), temp, temp);
+            buffer.insert(buffer.end(), temp, temp + bytes);  // ✅ 修正：插入 bytes 字节
             // std::vector<uint8_t> buffer(temp, temp + bytes);
-            
+
             while (true)
             { // 循环处理多个消息
                 // 解析完整数据帧
@@ -539,6 +553,12 @@ namespace tutorial {
                     //暂时去除包头包尾格式校验报错回调
                     // notify_error(tlv_error_code, error_msg);
                     NET_LOG_INFO("Net tlv_error_code:  [%s]",error_msg.c_str());
+
+                    // ✅ 解析失败，清空缓冲区避免死循环
+                    if (parse_msg_size == 0) {
+                        buffer.clear();
+                        break;
+                    }
                 }
                 {
                     tutorial::Person person;
@@ -572,10 +592,19 @@ namespace tutorial {
                                     {
                                         data_callback_(callback_msg);
                                     }
-                            } 
+                            }
                         }
-                }                                                                                                                                                              
-                continue;
+                }
+
+                // ✅ 解析成功，从缓冲区移除已处理的数据
+                if (parse_msg_size > 0) {
+                    buffer.erase(buffer.begin(), buffer.begin() + parse_msg_size);
+                }
+
+                // ✅ 如果缓冲区数据不足，跳出内层循环，继续接收数据
+                if (buffer.empty() || buffer.size() < 2) {
+                    break;
+                }
             }
             // buffer.clear();
         }       

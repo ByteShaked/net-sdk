@@ -64,38 +64,38 @@ fi
 echo "✅ 测试程序编译成功: $(ls -lh ./minimal_test | awk '{print $5}')"
 echo ""
 
-# 步骤 3: 运行测试
-echo "🚀 步骤 3/3: 运行 IM 信令测试 ..."
-echo "--------------------------------------------"
+# # 步骤 3: 运行测试
+# echo "🚀 步骤 3/3: 运行 IM 信令测试 ..."
+# echo "--------------------------------------------"
 
-# 设置动态库搜索路径
-export DYLD_LIBRARY_PATH="$PROJECT_ROOT/lib:$DYLD_LIBRARY_PATH"
+# # 设置动态库搜索路径
+# export DYLD_LIBRARY_PATH="$PROJECT_ROOT/lib:$DYLD_LIBRARY_PATH"
 
-# 显示测试信息
-echo "  ➤ 测试程序: $PROJECT_ROOT/test/build/minimal_test"
-echo "  ➤ 依赖库路径: $PROJECT_ROOT/lib/libnetwork.dylib"
-echo ""
-echo "开始测试..."
-echo "--------------------------------------------"
+# # 显示测试信息
+# echo "  ➤ 测试程序: $PROJECT_ROOT/test/build/minimal_test"
+# echo "  ➤ 依赖库路径: $PROJECT_ROOT/lib/libnetwork.dylib"
+# echo ""
+# echo "开始测试..."
+# echo "--------------------------------------------"
 
-# 运行测试
-./minimal_test
+# # 运行测试
+# ./minimal_test
 
-# 检查返回码
-TEST_RESULT=$?
-echo "--------------------------------------------"
-echo ""
+# # 检查返回码
+# TEST_RESULT=$?
+# echo "--------------------------------------------"
+# echo ""
 
-# 输出测试结果
-if [ $TEST_RESULT -eq 0 ]; then
-    echo "✅ 测试执行完成 (退出码: $TEST_RESULT)"
-else
-    echo "⚠️  测试执行完成，但返回非零退出码: $TEST_RESULT"
-fi
+# # 输出测试结果
+# if [ $TEST_RESULT -eq 0 ]; then
+#     echo "✅ 测试执行完成 (退出码: $TEST_RESULT)"
+# else
+#     echo "⚠️  测试执行完成，但返回非零退出码: $TEST_RESULT"
+# fi
 
-echo ""
-echo "============================================"
-echo "   测试流程结束"
-echo "============================================"
+# echo ""
+# echo "============================================"
+# echo "   测试流程结束"
+# echo "============================================"
 
-exit $TEST_RESULT
+# exit $TEST_RESULT

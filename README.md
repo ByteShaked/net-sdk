@@ -12,16 +12,85 @@
 
 - ✅ **TCP 长连接管理**：支持连接、断线重连、心跳保活
 - ✅ **Protobuf 序列化**：使用 Protocol Buffers v3.19 进行消息序列化
-- ✅ **TLV 协议封装**：自定义 Type-Length-Value 协议，包含 CRC16 校验
+- ✅ **TLV 协议封装**：自定义 Type-Length-Value 协议，包含 Varint 编码
 - ✅ **消息加密**：支持 AES 加密传输（可选）
 - ✅ **C 接口导出**：提供纯 C API，方便跨语言调用（已适配鸿蒙 NAPI）
-- ✅ **线程安全**：多线程模型（连接线程、接收线程、心跳线程、重连线程）
+- ✅ **线程安全**：多线程模型（接收线程、心跳线程、重连线程）
+- ✅ **跨平台支持**：macOS / Linux / 鸿蒙（已验证）
 
 ### 当前平台支持
 
+- ✅ **macOS**：原生支持，已完成本地测试验证
+- ✅ **Linux**：原生支持
 - ✅ **鸿蒙（HarmonyOS）**：通过 NAPI 桥接，编译为 ARM64 .so 库
-- ⚠️ **Linux**：原生支持（当前 CMakeLists.txt 配置）
-- ❌ **Windows / macOS / iOS / Android**：需要跨平台改造（见下文）
+- ⚠️ **Windows / iOS / Android**：需要进一步适配
+
+---
+
+## 🎉 最新进展（2024-11-18）
+
+### 修复的关键 Bug
+
+#### 1. Varint 编码/解码错误（严重）
+- **问题**：`encode_varint()` 使用错误的继续位标志 `0x40`（应为 `0x80`）
+- **影响**：导致服务器无法识别协议包，认证请求超时
+- **修复**：[TlvHandler.cpp:8](src/TlvHandler.cpp#L8) 改为标准 Protobuf Varint 编码
+- **状态**：✅ 已修复
+
+#### 2. 接收缓冲区管理错误（导致死循环）
+- **问题**：
+  - `buffer.insert(buffer.end(), temp, temp)` 未正确插入接收数据
+  - 解析失败时缓冲区未清理，导致死循环
+  - 解析成功后未移除已处理数据
+- **影响**：接收到数据后程序陷入死循环，疯狂输出错误日志
+- **修复**：[NetworkModule.cpp:539-600](src/NetworkModule.cpp#L539-L600)
+- **状态**：✅ 已修复
+
+#### 3. 心跳包处理错误
+- **问题**：收到服务器心跳后 `break` 导致接收循环退出
+- **修复**：改为 `continue` 继续接收下一个数据包
+- **状态**：✅ 已修复
+
+#### 4. 认证响应解析
+- **问题**：内层 `protodata` 包含 varint 长度前缀，直接解析失败
+- **修复**：跳过 varint 前缀后再解析 `UserAuthInner`
+- **状态**：✅ 已修复
+
+### 测试结果
+
+✅ **连接测试**：成功连接到 IM 服务器（202.103.39.205:8086）  
+✅ **认证测试**：认证成功，错误码 200  
+✅ **心跳测试**：每 5 秒自动发送/接收心跳包，连接保持稳定  
+✅ **跨平台测试**：macOS 本地测试通过，鸿蒙端收到被踢消息（证明登录成功）
+
+**测试日志示例**：
+```
+连接成功！
+接收线程和心跳线程已自动启动
+========================================
+
+========== 发送认证消息 ==========
+认证参数:
+  appId: cba0bb291548a8d73fa5502bebe4e64d
+  username: cjcjzqwbcs1
+  timestamp: 20261118112847
+  sig: afff193709e75150b78f48b157269c30
+
+========== 收到服务器响应 ==========
+消息类型 (prototype): 20
+错误码 (protoerrorcode): 200
+>>> 认证响应收到！
+
+认证响应详情：
+  authType: 0
+  username: 55001_172.19.182.61
+  sdkVersion: 
+  mode: 0
+
+[INFO]  Heartbeat: attempting to send...
+[INFO]  Heartbeat sent successfully, 2 bytes
+[INFO]  Net Received heartbeat packet, ignore.
+```
 
 ---
 

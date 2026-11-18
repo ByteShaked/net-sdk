@@ -12,6 +12,9 @@ set(Protobuf_LIBRARIES "/opt/protobuf-3.19.5/lib/libprotobuf.a")
 
 find_package(Boost REQUIRED COMPONENTS system)
 
+# 查找 OpenSSL
+find_package(OpenSSL REQUIRED)
+
 # ============================================================
 # 测试程序 1: network_test_app (从 app.cpp)
 # ============================================================
@@ -28,6 +31,7 @@ target_link_libraries(network_test_app PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/../lib/libnetwork.dylib
     ${Protobuf_LIBRARIES}
     ${Boost_LIBRARIES}
+    OpenSSL::Crypto
     pthread
 )
 
