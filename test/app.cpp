@@ -21,6 +21,7 @@
 // proto 头文件（已统一路径）
 #include "../include/TlvHandler.h"  // 包含 Person 别名定义和 proto 头文件
 #include "../proto_v19/auth/UserAuth.pb.h"
+#include "../proto_v19/auth/UserAuthResp.pb.h"
 #include "../proto_v19/msg/SendMsg.pb.h"
 #include <openssl/md5.h>
 #include <iomanip>
@@ -72,74 +73,132 @@ void signal_handler(int signal) {
     running = false;
 }
 
-// 数据回调：打印接收到的数据
+// Varint 解码函数（从鸿蒙代码复制）
+std::pair<uint32_t, size_t> decode_varint(const std::vector<uint8_t>& buffer, size_t pos) {
+    uint32_t result = 0;
+    size_t bytes_read = 0;
+    uint32_t shift = 0;
+
+    while (true) {
+        if (pos + bytes_read >= buffer.size()) {
+            return std::make_pair(0, 0);
+        }
+        uint8_t byte = buffer[pos + bytes_read];
+        result |= (byte & 0x7F) << shift;
+        bytes_read++;
+        if ((byte & 0x80) == 0) {
+            break;
+        }
+        shift += 7;
+        if (shift >= 32) {
+            return std::make_pair(0, 0);
+        }
+    }
+    return std::make_pair(result, bytes_read);
+}
+
+// 数据回调：完全参照鸿蒙 NAPI 的解析方式
 void on_data(const char* data, int len, void* userdata) {
-    std::cout << "\n========== 收到服务器响应 ==========" << std::endl;
-    std::cout << "数据长度: " << len << " 字节" << std::endl;
+    std::cout << "\n========================================" << std::endl;
+    std::cout << "Received data (length: " << len << " bytes)" << std::endl;
 
-    tutorial::Person person;
-    const std::string serialized_str(data, len);
-    if (person.ParseFromString(serialized_str)) {
-        std::cout << "消息类型 (prototype): " << person.prototype() << std::endl;
-        std::cout << "错误码 (protoerrorcode): " << person.protoerrorcode() << std::endl;
-        std::cout << "客户端编号 (protoclientno): " << person.protoclientno() << std::endl;
+    // 1. 解析外层协议
+    tutorial::Person outer;
+    if (!outer.ParseFromArray(data, len)) {
+        std::cerr << "外层协议解析失败" << std::endl;
+        return;
+    }
 
-        if (person.prototype() == 20) {
-            std::cout << ">>> 认证响应收到！" << std::endl;
+    // 打印外层协议所有字段（完全参照鸿蒙）
+    std::cout << "prototype: " << outer.prototype() << std::endl;
+    std::cout << "protoerrorcode: " << outer.protoerrorcode() << std::endl;
+    std::cout << "protoclientno: " << outer.protoclientno() << std::endl;
+    std::cout << "protobackexp: [" << outer.protobackexp() << "]" << std::endl;
+    std::cout << "protosource: " << outer.protosource() << std::endl;
+    std::cout << "protoencrypt: " << outer.protoencrypt() << std::endl;
+    std::cout << "prototoken: " << outer.prototoken() << std::endl;
+    std::cout << "protorouter: " << outer.protorouter() << std::endl;
 
-            // 解析认证响应的内层数据
-            if (!person.protodata().empty()) {
-                // protodata 格式：[varint长度] + [实际数据]
-                // 需要先跳过 varint 长度前缀
-                const std::string& proto_data = person.protodata();
-                size_t offset = 0;
+    // 2. 处理内层协议（如果存在）
+    if (!outer.protodata().empty()) {
+        const std::string& protoData = outer.protodata();
+        std::vector<uint8_t> buffer(protoData.begin(), protoData.end());
 
-                // 简单跳过 varint（假设长度 <= 127，varint 占 1 字节）
-                if (proto_data.size() > 0) {
-                    uint8_t first_byte = static_cast<uint8_t>(proto_data[0]);
-                    if (first_byte & 0x80) {
-                        // 多字节 varint，跳过直到找到最高位为 0 的字节
-                        while (offset < proto_data.size() && (static_cast<uint8_t>(proto_data[offset]) & 0x80)) {
-                            offset++;
-                        }
-                        offset++; // 跳过最后一个字节
-                    } else {
-                        // 单字节 varint
-                        offset = 1;
-                    }
-                }
-
-                std::string inner_data = proto_data.substr(offset);
-                tutorial::UserAuthInner authResp;
-                if (authResp.ParseFromString(inner_data)) {
-                    std::cout << "\n认证响应详情：" << std::endl;
-                    std::cout << "  authType: " << authResp.authtype() << std::endl;
-                    std::cout << "  username: " << authResp.username() << std::endl;
-                    std::cout << "  sdkVersion: " << authResp.sdkversion() << std::endl;
-                    std::cout << "  mode: " << authResp.mode() << std::endl;
-                    if (!authResp.extopts().empty()) {
-                        std::cout << "  extOpts: " << authResp.extopts() << std::endl;
-                    }
-                } else {
-                    std::cerr << "  [警告] 解析认证响应内层数据失败" << std::endl;
-                    std::cerr << "  protodata 前10字节 (hex): ";
-                    for (size_t i = 0; i < std::min(proto_data.size(), size_t(10)); i++) {
-                        printf("%02x ", (uint8_t)proto_data[i]);
-                    }
-                    std::cerr << std::endl;
-                }
-            }
-        } else if (person.prototype() == 29) {
-            std::cout << ">>> 消息发送响应收到！" << std::endl;
+        // 如果需要解密
+        if (outer.protoencrypt() != 0) {
+            std::cout << "  [注意] protoencrypt != 0，需要解密但测试代码暂不支持" << std::endl;
+            // 生产环境：buffer = Cryptos::toQESDecode(secret_key, buffer);
         }
 
-        if (!person.protodata().empty()) {
-            std::cout << "响应数据长度: " << person.protodata().length() << " 字节" << std::endl;
+        // 3. 解码 varint 长度头
+        auto result_varint = decode_varint(buffer, 0);
+        uint32_t innerLen = result_varint.first;
+        uint32_t varintBytes = result_varint.second;
+
+        std::cout << "\n内层数据处理：" << std::endl;
+        std::cout << "  varint 字节数: " << varintBytes << std::endl;
+        std::cout << "  内层数据长度: " << innerLen << std::endl;
+        std::cout << "  buffer 总大小: " << buffer.size() << std::endl;
+
+        if (varintBytes == 0 || buffer.size() < varintBytes + innerLen) {
+            std::cerr << "  [错误] 内层协议长度异常" << std::endl;
+            return;
+        }
+
+        // 4. 根据消息类型解析内层协议
+        if (outer.prototype() == 20) {
+            std::cout << "\n>>> 认证响应（type 20）" << std::endl;
+
+            tutorial::UserAuthRespInner authResp;
+            if (authResp.ParseFromArray(buffer.data() + varintBytes, innerLen)) {
+                std::cout << "认证响应详情：" << std::endl;
+                std::cout << "  authState: " << authResp.authstate() << std::endl;
+                std::cout << "  kickoffText: " << authResp.kickofftext() << std::endl;
+                std::cout << "  connectorId: " << authResp.connectorid() << std::endl;
+                std::cout << "  version: " << authResp.version() << std::endl;
+                std::cout << "  pversion: " << authResp.pversion() << std::endl;
+                std::cout << "  historyver: " << authResp.historyver() << std::endl;
+                std::cout << "  authToken: " << authResp.authtoken() << std::endl;
+                if (authResp.has_loguploadpolicy()) {
+                    std::cout << "  logUploadPolicy:" << std::endl;
+                    std::cout << "    enableLog: " << authResp.loguploadpolicy().enablelog() << std::endl;
+                    std::cout << "    level: " << authResp.loguploadpolicy().level() << std::endl;
+                    std::cout << "    policy: " << authResp.loguploadpolicy().policy() << std::endl;
+                }
+                std::cout << "  appleDeviceToken: " << authResp.appledevicetoken() << std::endl;
+                if (authResp.has_mediadatapolicy()) {
+                    std::cout << "  mediaDataPolicy:" << std::endl;
+                    std::cout << "    summaryRule: " << authResp.mediadatapolicy().summaryrule() << std::endl;
+                    std::cout << "    summaryTime: " << authResp.mediadatapolicy().summarytime() << std::endl;
+                    std::cout << "    detailRule: " << authResp.mediadatapolicy().detailrule() << std::endl;
+                    std::cout << "    detailTime: " << authResp.mediadatapolicy().detailtime() << std::endl;
+                }
+                if (!authResp.extopts().empty()) {
+                    std::cout << "  extOpts: " << authResp.extopts() << std::endl;
+                }
+            } else {
+                std::cerr << "  [警告] 解析认证响应内层数据失败" << std::endl;
+            }
+        } else if (outer.prototype() == 29) {
+            std::cout << "\n>>> 消息发送响应（type 29）" << std::endl;
+
+            tutorial::SendMsgInner msgResp;
+            if (msgResp.ParseFromArray(buffer.data() + varintBytes, innerLen)) {
+                std::cout << "消息响应详情：" << std::endl;
+                std::cout << "  msgType: " << msgResp.msgtype() << std::endl;
+                std::cout << "  msgId: " << msgResp.msgid() << std::endl;
+                std::cout << "  msgContent: " << msgResp.msgcontent() << std::endl;
+                std::cout << "  msgSender: " << msgResp.msgsender() << std::endl;
+                std::cout << "  msgReceiver: " << msgResp.msgreceiver() << std::endl;
+            }
+        } else {
+            std::cout << "\n>>> 其他消息类型: " << outer.prototype() << std::endl;
         }
     } else {
-        std::cerr << "解析响应失败" << std::endl;
+        std::cout << "\n[注意] 无内层数据（仅外层协议）" << std::endl;
     }
-    std::cout << "==================================\n" << std::endl;
+
+    std::cout << "========================================\n" << std::endl;
 }
 
 // 错误回调：打印错误信息
@@ -177,7 +236,7 @@ void sendAuthMessage() {
     userAuth.set_sig(sig);
     userAuth.set_sdkversion("6.2.0");
     userAuth.set_imei("bf77a0fef33956721f1404ea8a3a60ad");
-    userAuth.set_mode(2);  // loginMode: AUTO
+    userAuth.set_mode(1);  // loginMode: AUTO
     userAuth.set_network(1);
     userAuth.set_pwd("");
     userAuth.set_bundleid("1");
@@ -224,6 +283,11 @@ void sendChatMessage() {
 }
 
 int main() {
+    // 禁用标准输出缓冲，确保日志即时打印
+    std::cout.setf(std::ios::unitbuf);
+    setvbuf(stdout, NULL, _IONBF, 0);
+    setvbuf(stderr, NULL, _IONBF, 0);
+
     // 注册信号处理
     std::signal(SIGINT, signal_handler);
     std::signal(SIGTERM, signal_handler);
