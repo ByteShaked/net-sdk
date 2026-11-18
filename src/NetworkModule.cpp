@@ -1,7 +1,22 @@
 #include "NetworkModule.h"
 #include <iostream>
-#include <boost/asio.hpp>
-#include <boost/asio/ip/tcp.hpp>
+
+// 根据编译目标选择不同的网络库
+#if defined(__OHOS__) || (defined(__linux__) && defined(__aarch64__))
+    // 鸿蒙或 Linux ARM64：使用原生 POSIX API
+    #include <sys/socket.h>
+    #include <netdb.h>
+    #include <arpa/inet.h>
+    #include <unistd.h>
+    #include <netinet/tcp.h>
+    #define USE_NATIVE_SOCKET 1
+#else
+    // 其他平台：使用 Boost.Asio
+    #include <boost/asio.hpp>
+    #include <boost/asio/ip/tcp.hpp>
+    #define USE_NATIVE_SOCKET 0
+#endif
+
 #include "common.h"
 #include "net_log_macro.h"
 
@@ -59,7 +74,57 @@ namespace tutorial {
            NET_LOG_INFO("Net host:  [%s]",last_host_.c_str());
            NET_LOG_INFO("Net port:  [%d]", last_port_);
 
-            // DNS 解析 + 建立连接（新版 Boost.Asio API，跨平台）
+#if USE_NATIVE_SOCKET
+            // ===== 鸿蒙/Linux ARM64：使用原生 POSIX getaddrinfo() =====
+            struct addrinfo hints, *res, *p;
+            memset(&hints, 0, sizeof hints);
+            hints.ai_family = AF_UNSPEC;     // IPv4 或 IPv6
+            hints.ai_socktype = SOCK_STREAM; // TCP
+
+            // DNS 解析
+            int status = getaddrinfo(last_host_.c_str(), std::to_string(last_port_).c_str(), &hints, &res);
+            if (status != 0) {
+                notify_error(NETWORK_ERR_DNS_RESOLUTION_FAILED, "DNS解析失败: " + std::string(gai_strerror(status)));
+                return false;
+            }
+
+            // 尝试连接所有解析到的地址
+            int sockfd = -1;
+            for (p = res; p != NULL; p = p->ai_next) {
+                sockfd = socket(p->ai_family, p->ai_socktype, p->ai_protocol);
+                if (sockfd == -1) continue;
+
+                if (::connect(sockfd, p->ai_addr, p->ai_addrlen) == 0) {
+                    break; // 连接成功
+                }
+                close(sockfd);
+                sockfd = -1;
+            }
+
+            freeaddrinfo(res);
+
+            if (sockfd == -1) {
+                notify_error(NETWORK_ERR_CONNECTION_FAILED, "Connection failed");
+                return false;
+            }
+
+            NET_LOG_INFO("Connected to [%s]:[%d]", last_host_.c_str(), last_port_);
+
+            // 设置 TCP_NODELAY（禁用 Nagle 算法，降低延迟）
+            int flag = 1;
+            setsockopt(sockfd, IPPROTO_TCP, TCP_NODELAY, &flag, sizeof(flag));
+
+            // 保存 socket fd
+            {
+                std::lock_guard<std::mutex> lock(socket_mutex_);
+                if (sockfd_ != -1) {
+                    close(sockfd_);
+                }
+                sockfd_ = sockfd;
+            }
+
+#else
+            // ===== 其他平台：使用 Boost.Asio =====
             boost::asio::io_context io_ctx;
             boost::system::error_code ec;
             boost::asio::ip::tcp::resolver resolver(io_ctx);
@@ -95,13 +160,12 @@ namespace tutorial {
                 }
                 sockfd_ = (int)boost_sock.release();
             }
-            // NET_LOG_INFO("connection_state_: [%d]", 
-            //                    connection_state_);
-            // // 更新连接状态
+#endif
+
+            // 更新连接状态
             {
-                // std::lock_guard<std::mutex> lock(state_mutex_);    
                 connection_state_ = ConnectionState::CONNECTED;
-                stop_threads_ = false; 
+                stop_threads_ = false;
             }
             // 启动工作线程
             if (receive_thread_running_) {
@@ -114,11 +178,11 @@ namespace tutorial {
 
             return true;
 
-        } catch (const boost::system::system_error& e) {
-            notify_error(NETWORK_ERR_DNS_RESOLUTION_FAILED, std::string("DNS resolution failed: ") + e.what());
+        } catch (const std::exception& e) {
+            notify_error(NETWORK_ERR_DNS_RESOLUTION_FAILED, std::string("Connection failed: ") + e.what());
             return false;
         } catch (...) {
-            notify_error(NETWORK_ERR_DNS_UNKNOWN, "Unknown error during DNS resolution");
+            notify_error(NETWORK_ERR_DNS_UNKNOWN, "Unknown error during connection");
             return false;
         }
     }

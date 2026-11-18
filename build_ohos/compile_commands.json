@@ -1,0 +1,512 @@
+[
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/src/NetworkModule.cpp.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/src/NetworkModule.cpp",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/src/NetworkModule.cpp",
+  "output": "CMakeFiles/network.dir/src/NetworkModule.cpp.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/src/network_api.cpp.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/src/network_api.cpp",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/src/network_api.cpp",
+  "output": "CMakeFiles/network.dir/src/network_api.cpp.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/src/TlvHandler.cpp.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/src/TlvHandler.cpp",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/src/TlvHandler.cpp",
+  "output": "CMakeFiles/network.dir/src/TlvHandler.cpp.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/src/crypto_util.cpp.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/src/crypto_util.cpp",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/src/crypto_util.cpp",
+  "output": "CMakeFiles/network.dir/src/crypto_util.cpp.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/src/NetLog.cpp.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/src/NetLog.cpp",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/src/NetLog.cpp",
+  "output": "CMakeFiles/network.dir/src/NetLog.cpp.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/BatchSetDisturb.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/BatchSetDisturb.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/BatchSetDisturb.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/BatchSetDisturb.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/PublishSubscribeState.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/PublishSubscribeState.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/PublishSubscribeState.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/PublishSubscribeState.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/auth/Logout.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/auth/Logout.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/auth/Logout.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/auth/Logout.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/auth/MultiDeviceNotify.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/auth/MultiDeviceNotify.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/auth/MultiDeviceNotify.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/auth/MultiDeviceNotify.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/auth/UserAuth.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/auth/UserAuth.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/auth/UserAuth.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/auth/UserAuth.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/auth/UserAuthResp.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/auth/UserAuthResp.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/auth/UserAuthResp.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/auth/UserAuthResp.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/call/CallEventData.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/call/CallEventData.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/call/CallEventData.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/call/CallEventData.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/group/AssignGroupAdmin.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/AssignGroupAdmin.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/AssignGroupAdmin.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/group/AssignGroupAdmin.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/group/ConfirmInviteJoinGroup.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/ConfirmInviteJoinGroup.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/ConfirmInviteJoinGroup.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/group/ConfirmInviteJoinGroup.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/group/ConfirmJoinGroup.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/ConfirmJoinGroup.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/ConfirmJoinGroup.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/group/ConfirmJoinGroup.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/group/CreateGroup.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/CreateGroup.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/CreateGroup.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/group/CreateGroup.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/group/CreateGroupResp.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/CreateGroupResp.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/CreateGroupResp.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/group/CreateGroupResp.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/group/DeleteGroupMember.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/DeleteGroupMember.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/DeleteGroupMember.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/group/DeleteGroupMember.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/group/DismissGroup.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/DismissGroup.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/DismissGroup.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/group/DismissGroup.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/group/ForbidMemberSpeak.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/ForbidMemberSpeak.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/ForbidMemberSpeak.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/group/ForbidMemberSpeak.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/group/GetGroupDetail.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/GetGroupDetail.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/GetGroupDetail.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/group/GetGroupDetail.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/group/GetGroupDetailResp.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/GetGroupDetailResp.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/GetGroupDetailResp.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/group/GetGroupDetailResp.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/group/GetGroupMembers.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/GetGroupMembers.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/GetGroupMembers.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/group/GetGroupMembers.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/group/GetGroupMembersResp.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/GetGroupMembersResp.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/GetGroupMembersResp.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/group/GetGroupMembersResp.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/group/GetOwnerGroups.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/GetOwnerGroups.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/GetOwnerGroups.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/group/GetOwnerGroups.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/group/GetOwnerGroupsResp.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/GetOwnerGroupsResp.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/GetOwnerGroupsResp.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/group/GetOwnerGroupsResp.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/group/GetPublicGroups.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/GetPublicGroups.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/GetPublicGroups.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/group/GetPublicGroups.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/group/GetPublicGroupsResp.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/GetPublicGroupsResp.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/GetPublicGroupsResp.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/group/GetPublicGroupsResp.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/group/GroupNotify.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/GroupNotify.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/GroupNotify.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/group/GroupNotify.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/group/InviteJoinGroup.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/InviteJoinGroup.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/InviteJoinGroup.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/group/InviteJoinGroup.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/group/InviteJoinGroupResp.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/InviteJoinGroupResp.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/InviteJoinGroupResp.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/group/InviteJoinGroupResp.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/group/JoinGroup.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/JoinGroup.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/JoinGroup.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/group/JoinGroup.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/group/ModifyGroup.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/ModifyGroup.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/ModifyGroup.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/group/ModifyGroup.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/group/ModifyMemberCard.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/ModifyMemberCard.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/ModifyMemberCard.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/group/ModifyMemberCard.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/group/QueryGroupMemberCard.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/QueryGroupMemberCard.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/QueryGroupMemberCard.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/group/QueryGroupMemberCard.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/group/QueryGroupMemberCardResp.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/QueryGroupMemberCardResp.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/QueryGroupMemberCardResp.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/group/QueryGroupMemberCardResp.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/group/QuitGroup.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/QuitGroup.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/QuitGroup.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/group/QuitGroup.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/group/SearchGroups.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/SearchGroups.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/SearchGroups.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/group/SearchGroups.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/group/SearchGroupsResp.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/SearchGroupsResp.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/SearchGroupsResp.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/group/SearchGroupsResp.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/group/SetGroupMemberRole.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/SetGroupMemberRole.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/SetGroupMemberRole.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/group/SetGroupMemberRole.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/group/SetGroupMessagRule.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/SetGroupMessagRule.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/group/SetGroupMessagRule.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/group/SetGroupMessagRule.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/msg/AppleBadgeNumber.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/AppleBadgeNumber.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/AppleBadgeNumber.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/msg/AppleBadgeNumber.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/msg/ConfirmMsg.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/ConfirmMsg.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/ConfirmMsg.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/msg/ConfirmMsg.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/msg/DataCopyMsg.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/DataCopyMsg.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/DataCopyMsg.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/msg/DataCopyMsg.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/msg/FileUploadFinished.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/FileUploadFinished.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/FileUploadFinished.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/msg/FileUploadFinished.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/msg/GetRedpacketTokenResp.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/GetRedpacketTokenResp.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/GetRedpacketTokenResp.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/msg/GetRedpacketTokenResp.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/msg/MsgLite.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/MsgLite.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/MsgLite.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/msg/MsgLite.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/msg/MsgOperation.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/MsgOperation.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/MsgOperation.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/msg/MsgOperation.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/msg/MsgOperationData.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/MsgOperationData.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/MsgOperationData.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/msg/MsgOperationData.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/msg/NoticeMsg.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/NoticeMsg.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/NoticeMsg.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/msg/NoticeMsg.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/msg/PushApnsMsg.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/PushApnsMsg.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/PushApnsMsg.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/msg/PushApnsMsg.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/msg/PushMsg.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/PushMsg.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/PushMsg.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/msg/PushMsg.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/msg/PushMsgNotify.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/PushMsgNotify.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/PushMsgNotify.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/msg/PushMsgNotify.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/msg/QueryMsgReceipt.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/QueryMsgReceipt.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/QueryMsgReceipt.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/msg/QueryMsgReceipt.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/msg/QueryMsgReceiptResp.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/QueryMsgReceiptResp.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/QueryMsgReceiptResp.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/msg/QueryMsgReceiptResp.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/msg/SearchData.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/SearchData.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/SearchData.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/msg/SearchData.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/msg/SendMsg.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/SendMsg.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/SendMsg.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/msg/SendMsg.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/msg/SendMsgBlackWordResp.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/SendMsgBlackWordResp.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/SendMsgBlackWordResp.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/msg/SendMsgBlackWordResp.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/msg/SendMsgResp.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/SendMsgResp.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/SendMsgResp.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/msg/SendMsgResp.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/msg/StoreMsg.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/StoreMsg.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/StoreMsg.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/msg/StoreMsg.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/msg/StoreMsgResp.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/StoreMsgResp.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/StoreMsgResp.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/msg/StoreMsgResp.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/msg/SyncDCRequest.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/SyncDCRequest.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/SyncDCRequest.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/msg/SyncDCRequest.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/msg/SyncMsg.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/SyncMsg.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/SyncMsg.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/msg/SyncMsg.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/msg/SyncMsgResp.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/SyncMsgResp.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/SyncMsgResp.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/msg/SyncMsgResp.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/msg/TransferMsg.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/TransferMsg.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msg/TransferMsg.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/msg/TransferMsg.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/msgcopy/MsgCopy.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msgcopy/MsgCopy.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/msgcopy/MsgCopy.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/msgcopy/MsgCopy.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/personinfo/AppleDeviceToken.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/personinfo/AppleDeviceToken.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/personinfo/AppleDeviceToken.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/personinfo/AppleDeviceToken.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/personinfo/DeviceDetail.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/personinfo/DeviceDetail.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/personinfo/DeviceDetail.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/personinfo/DeviceDetail.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/personinfo/PersonInfo.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/personinfo/PersonInfo.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/personinfo/PersonInfo.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/personinfo/PersonInfo.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/personinfo/PersonInfoResp.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/personinfo/PersonInfoResp.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/personinfo/PersonInfoResp.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/personinfo/PersonInfoResp.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/personinfo/QueryPersonInfo.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/personinfo/QueryPersonInfo.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/personinfo/QueryPersonInfo.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/personinfo/QueryPersonInfo.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/personinfo/SetPushDetail.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/personinfo/SetPushDetail.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/personinfo/SetPushDetail.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/personinfo/SetPushDetail.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/presence/GetTopContactResp.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/presence/GetTopContactResp.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/presence/GetTopContactResp.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/presence/GetTopContactResp.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/presence/GetUserState.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/presence/GetUserState.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/presence/GetUserState.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/presence/GetUserState.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/presence/GetUserStateResp.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/presence/GetUserStateResp.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/presence/GetUserStateResp.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/presence/GetUserStateResp.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/presence/MediaStatisticsData.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/presence/MediaStatisticsData.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/presence/MediaStatisticsData.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/presence/MediaStatisticsData.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/presence/PublishPresence.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/presence/PublishPresence.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/presence/PublishPresence.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/presence/PublishPresence.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/presence/PublishPresenceResp.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/presence/PublishPresenceResp.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/presence/PublishPresenceResp.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/presence/PublishPresenceResp.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/presence/SetDisturb.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/presence/SetDisturb.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/presence/SetDisturb.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/presence/SetDisturb.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/presence/SetTopContact.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/presence/SetTopContact.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/presence/SetTopContact.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/presence/SetTopContact.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/presence/SetUserState.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/presence/SetUserState.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/presence/SetUserState.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/presence/SetUserState.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/push/AppleMsg.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/push/AppleMsg.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/push/AppleMsg.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/push/AppleMsg.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/push/PushAction.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/push/PushAction.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/push/PushAction.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/push/PushAction.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/push/PushOuter.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/push/PushOuter.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/push/PushOuter.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/push/PushOuter.pb.cc.o"
+},
+{
+  "directory": "/Users/byte/publicspace/vscode/electron_research/net-sdk/build_ohos",
+  "command": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin/clang++ --sysroot=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/sysroot -DBUILD_VERSION=0 -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -DPLATFORM_LINUX -DRELEASE_VERSION=0 -Dnetwork_EXPORTS -I/Users/byte/publicspace/vscode/electron_research/net-sdk/include -I/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19 -target aarch64-unknown-linux-ohos -fPIC -fstack-protector-strong -std=c++11 -O3 -DNDEBUG -std=gnu++11 -fPIC -o CMakeFiles/network.dir/proto_v19/push/SysEvent.pb.cc.o -c /Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/push/SysEvent.pb.cc",
+  "file": "/Users/byte/publicspace/vscode/electron_research/net-sdk/proto_v19/push/SysEvent.pb.cc",
+  "output": "CMakeFiles/network.dir/proto_v19/push/SysEvent.pb.cc.o"
+}
+]

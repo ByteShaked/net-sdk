@@ -47,7 +47,15 @@ set(Protobuf_INCLUDE_DIR "/opt/protobuf-3.19.5/include")
 set(Protobuf_LIBRARIES "/opt/protobuf-3.19.5/lib/libprotobuf.a")
 set(Protobuf_PROTOC_EXECUTABLE "/opt/protobuf-3.19.5/bin/protoc")
 
-find_package(Boost REQUIRED COMPONENTS system)
+# 查找 Boost（鸿蒙交叉编译时可选）
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux" AND CMAKE_SYSTEM_PROCESSOR STREQUAL "aarch64")
+    message(STATUS "Cross-compiling for OpenHarmony, Boost not required")
+    set(SKIP_BOOST TRUE)
+else()
+    find_package(Boost REQUIRED COMPONENTS system)
+    set(SKIP_BOOST FALSE)
+endif()
+
 find_package(ZLIB REQUIRED)             # protobuf 3.19.x 依赖 zlib
 
 message(STATUS "Protobuf version:  ${Protobuf_VERSION}")
@@ -81,8 +89,12 @@ set(NETWORK_SOURCES
 set(NETWORK_INCLUDE_DIRS
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     ${CMAKE_CURRENT_SOURCE_DIR}/proto_v19          # 3.19.5 头文件，必须在系统 protobuf 前面
-    ${Boost_INCLUDE_DIRS}
 )
+
+# 非鸿蒙平台才添加 Boost 头文件
+if(NOT SKIP_BOOST)
+    list(APPEND NETWORK_INCLUDE_DIRS ${Boost_INCLUDE_DIRS})
+endif()
 
 # ============================================================
 # 编译动态库 libnetwork
@@ -91,11 +103,21 @@ add_library(network SHARED ${NETWORK_SOURCES})
 
 target_include_directories(network PRIVATE ${NETWORK_INCLUDE_DIRS})
 
-target_link_libraries(network PRIVATE
-    ${Protobuf_LIBRARIES}          # 直接链接 Protobuf 3.19.5 静态库
-    ${Boost_LIBRARIES}
-    ZLIB::ZLIB
-)
+# 根据平台链接不同的库
+if(SKIP_BOOST)
+    # 鸿蒙交叉编译：不链接 Boost
+    target_link_libraries(network PRIVATE
+        ${Protobuf_LIBRARIES}          # 直接链接 Protobuf 3.19.5 静态库
+        ZLIB::ZLIB
+    )
+else()
+    # 其他平台：链接 Boost
+    target_link_libraries(network PRIVATE
+        ${Protobuf_LIBRARIES}          # 直接链接 Protobuf 3.19.5 静态库
+        ${Boost_LIBRARIES}
+        ZLIB::ZLIB
+    )
+endif()
 
 # Windows 需要额外链接 winsock
 if(WIN32)
