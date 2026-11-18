@@ -1,5 +1,6 @@
 # 编译产物
 build/
+build_ohos/
 out/
 bin/
 lib/
@@ -34,4 +35,7 @@ proto_x86_v19/
 
 # proto_v19 是从 tx_napi 复用的已生成代码，纳入版本控制
 
+# 日志文件
 output.log
+output*.log
+
