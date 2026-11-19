@@ -38,19 +38,21 @@ jobs:
         cmake --build protobuf-build --config Release --parallel 4
         cmake --install protobuf-build --config Release
 
-    - name: 安装 vcpkg 依赖管理器
-      run: |
-        git clone https://github.com/microsoft/vcpkg.git C:\vcpkg
-        C:\vcpkg\bootstrap-vcpkg.bat
-
     - name: 安装其他依赖 (Boost + ZLIB)
       run: |
         C:\vcpkg\vcpkg install boost-system:x64-windows zlib:x64-windows
         C:\vcpkg\vcpkg integrate install
 
+    - name: 验证依赖安装
+      run: |
+        echo "=== Boost 安装路径 ==="
+        dir C:\vcpkg\installed\x64-windows\include\boost
+        echo "=== Protobuf 安装路径 ==="
+        dir C:\protobuf-3.19.5\include\google\protobuf
+
     - name: 配置 CMake
       run: |
-        cmake -B build-windows -G "Visual Studio 17 2022" -A x64 -DCMAKE_TOOLCHAIN_FILE=C:\vcpkg\scripts\buildsystems\vcpkg.cmake -DCMAKE_BUILD_TYPE=Release -DProtobuf_INCLUDE_DIR=C:\protobuf-3.19.5\include -DProtobuf_LIBRARIES=C:\protobuf-3.19.5\lib\libprotobuf.lib -DProtobuf_PROTOC_EXECUTABLE=C:\protobuf-3.19.5\bin\protoc.exe
+        cmake -B build-windows -G "Visual Studio 17 2022" -A x64 -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_BUILD_TYPE=Release -DProtobuf_INCLUDE_DIR=C:/protobuf-3.19.5/include -DProtobuf_LIBRARIES=C:/protobuf-3.19.5/lib/libprotobuf.lib -DProtobuf_PROTOC_EXECUTABLE=C:/protobuf-3.19.5/bin/protoc.exe -DBOOST_ROOT=C:/vcpkg/installed/x64-windows -DBoost_INCLUDE_DIR=C:/vcpkg/installed/x64-windows/include
 
     - name: 编译
       run: cmake --build build-windows --config Release --parallel 4
