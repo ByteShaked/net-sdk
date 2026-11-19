@@ -11,7 +11,7 @@
 ### 优化
 - 移除鸿蒙平台对 Boost 的依赖
 - 使用原生 `getaddrinfo()` 替代 Boost.Asio 进行 DNS 解析
-- 复用 tx_napi 项目中现成的 Protobuf 3.19.5 ARM64 库
+- 复用 tx_napi 项目中现成的 Protobuf 3.19.5 ARM64 库，把Protobuf静态链接进去了
 - CMakeLists.txt 支持动态配置 Protobuf 路径
 
 ### 验证
