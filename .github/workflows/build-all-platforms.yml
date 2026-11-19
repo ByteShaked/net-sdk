@@ -90,13 +90,40 @@ jobs:
     - name: 编译
       run: cmake --build build-windows --config Release --parallel 4
 
+    - name: 检查编译产物
+      run: |
+        echo "=== 编译产物列表 ==="
+        dir build-windows\Release
+        echo ""
+        echo "=== lib 目录 ==="
+        dir lib
+        echo ""
+        echo "=== lib\Release 目录 ==="
+        dir lib\Release -ErrorAction SilentlyContinue
+        echo ""
+        echo "=== 查找所有 .lib 和 .dll 文件 ==="
+        Get-ChildItem -Path build-windows -Recurse -Include *.lib,*.dll | Select-Object FullName,Length
+
     - name: 打包产物
       run: |
         mkdir artifacts-windows
         mkdir artifacts-windows\include
-        Copy-Item lib\Release\* artifacts-windows\ -Force -ErrorAction SilentlyContinue
-        Copy-Item lib\* artifacts-windows\ -Force -ErrorAction SilentlyContinue
+
+        # 复制 DLL 和 LIB 文件（从 build-windows/Release 和 lib/Release）
+        Copy-Item build-windows\Release\*.dll artifacts-windows\ -Force -ErrorAction SilentlyContinue
+        Copy-Item build-windows\Release\*.lib artifacts-windows\ -Force -ErrorAction SilentlyContinue
+        Copy-Item lib\Release\*.dll artifacts-windows\ -Force -ErrorAction SilentlyContinue
+        Copy-Item lib\Release\*.lib artifacts-windows\ -Force -ErrorAction SilentlyContinue
+        Copy-Item lib\*.dll artifacts-windows\ -Force -ErrorAction SilentlyContinue
+        Copy-Item lib\*.lib artifacts-windows\ -Force -ErrorAction SilentlyContinue
+
+        # 复制头文件
         Copy-Item include\* artifacts-windows\include\ -Recurse -Force
+
+        echo ""
+        echo "=== 打包内容 ==="
+        dir artifacts-windows
+
         Compress-Archive -Path artifacts-windows\* -DestinationPath im_network_windows_x64.zip
 
     - name: 上传编译产物
