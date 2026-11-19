@@ -22,23 +22,57 @@ jobs:
       with:
         arch: x64
 
-    - name: 编译安装 Protobuf 3.19.5（无缓存）
+    - name: 缓存 Protobuf
+      uses: actions/cache@v4
+      with:
+        path: C:\protobuf-3.19.5
+        key: protobuf-3.19.5-${{ runner.os }}-x64-mt-v1
+        restore-keys: |
+          protobuf-3.19.5-${{ runner.os }}-x64-
+
+    - name: 缓存 vcpkg
+      uses: actions/cache@v4
+      with:
+        path: |
+          C:\vcpkg\installed
+          C:\vcpkg\packages
+          C:\vcpkg\buildtrees
+        key: vcpkg-boost-zlib-${{ runner.os }}-x64-v1
+        restore-keys: |
+          vcpkg-boost-zlib-${{ runner.os }}-x64-
+
+    - name: 编译安装 Protobuf 3.19.5
       run: |
-        curl -L -o protobuf-3.19.5.tar.gz https://github.com/protocolbuffers/protobuf/releases/download/v3.19.5/protobuf-cpp-3.19.5.tar.gz
-        tar -xzf protobuf-3.19.5.tar.gz
-        cmake -B protobuf-build -S protobuf-3.19.5/cmake -G "Visual Studio 17 2022" -A x64 -DCMAKE_BUILD_TYPE=Release -Dprotobuf_BUILD_TESTS=OFF -DCMAKE_INSTALL_PREFIX=C:\protobuf-3.19.5 -Dprotobuf_WITH_ZLIB=OFF
-        cmake --build protobuf-build --config Release --parallel 4
-        cmake --install protobuf-build --config Release
+        if (-Not (Test-Path "C:\protobuf-3.19.5\bin\protoc.exe")) {
+          Write-Host "从源码编译 Protobuf 3.19.5..."
+          curl -L -o protobuf-3.19.5.tar.gz https://github.com/protocolbuffers/protobuf/releases/download/v3.19.5/protobuf-cpp-3.19.5.tar.gz
+          tar -xzf protobuf-3.19.5.tar.gz
+          cmake -B protobuf-build -S protobuf-3.19.5/cmake -G "Visual Studio 17 2022" -A x64 -DCMAKE_BUILD_TYPE=Release -Dprotobuf_BUILD_TESTS=OFF -DCMAKE_INSTALL_PREFIX=C:\protobuf-3.19.5 -Dprotobuf_WITH_ZLIB=OFF
+          cmake --build protobuf-build --config Release --parallel 4
+          cmake --install protobuf-build --config Release
+        } else {
+          Write-Host "✅ Protobuf 已从缓存恢复"
+        }
 
     - name: 安装 vcpkg 依赖管理器
       run: |
-        git clone --depth 1 https://github.com/microsoft/vcpkg.git C:\vcpkg
+        if (-Not (Test-Path "C:\vcpkg")) {
+          Write-Host "克隆 vcpkg 仓库..."
+          git clone --depth 1 https://github.com/microsoft/vcpkg.git C:\vcpkg
+        } else {
+          Write-Host "✅ vcpkg 目录已存在"
+        }
         cd C:\vcpkg
         .\bootstrap-vcpkg.bat
 
     - name: 安装依赖 (Boost + ZLIB)
       run: |
-        C:\vcpkg\vcpkg install boost-asio:x64-windows zlib:x64-windows
+        if (-Not (Test-Path "C:\vcpkg\installed\x64-windows\include\boost\asio.hpp")) {
+          Write-Host "安装 Boost 和 ZLIB..."
+          C:\vcpkg\vcpkg install boost-asio:x64-windows zlib:x64-windows
+        } else {
+          Write-Host "✅ Boost 和 ZLIB 已从缓存恢复"
+        }
         C:\vcpkg\vcpkg integrate install
 
     - name: 验证依赖安装
@@ -59,8 +93,9 @@ jobs:
     - name: 打包产物
       run: |
         mkdir artifacts-windows
-        Copy-Item lib\Release\* artifacts-windows\ -Recurse -Force -ErrorAction SilentlyContinue
-        Copy-Item lib\* artifacts-windows\ -Recurse -Force -ErrorAction SilentlyContinue
+        mkdir artifacts-windows\include
+        Copy-Item lib\Release\* artifacts-windows\ -Force -ErrorAction SilentlyContinue
+        Copy-Item lib\* artifacts-windows\ -Force -ErrorAction SilentlyContinue
         Copy-Item include\* artifacts-windows\include\ -Recurse -Force
         Compress-Archive -Path artifacts-windows\* -DestinationPath im_network_windows_x64.zip
 
