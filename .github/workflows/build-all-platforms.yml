@@ -35,20 +35,18 @@ jobs:
         tar -xzf protobuf-3.19.5.tar.gz
         cd protobuf-3.19.5
 
-        # 配置并编译
-        mkdir build
-        cd build
-        cmake ../cmake -G "Visual Studio 17 2022" -A x64 `
+        # 配置并编译（使用 -B 参数直接指定构建目录，避免 mkdir 冲突）
+        cmake -B build -S cmake -G "Visual Studio 17 2022" -A x64 `
           -DCMAKE_BUILD_TYPE=Release `
           -Dprotobuf_BUILD_TESTS=OFF `
           -Dprotobuf_MSVC_STATIC_RUNTIME=OFF `
           -DCMAKE_INSTALL_PREFIX=C:\protobuf-3.19.5
 
-        cmake --build . --config Release --parallel 4
-        cmake --install . --config Release
+        cmake --build build --config Release --parallel 4
+        cmake --install build --config Release
 
         # 返回工作目录
-        cd ..\..
+        cd ..
 
     - name: 安装 vcpkg 依赖管理器
       run: |
