@@ -104,6 +104,11 @@ endif()
 # ============================================================
 add_library(network SHARED ${NETWORK_SOURCES})
 
+# Windows 平台使用静态运行时库（与 Protobuf 3.19.5 保持一致）
+if(MSVC)
+    set_property(TARGET network PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+endif()
+
 target_include_directories(network PRIVATE ${NETWORK_INCLUDE_DIRS})
 
 # 根据平台链接不同的库
