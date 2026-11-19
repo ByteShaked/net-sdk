@@ -5,6 +5,13 @@
 #include <iomanip>
 #include <sstream>
 #include <stdarg.h>
+#include <vector>
+
+// Windows平台需要的头文件
+#ifdef _WIN32
+#include <direct.h>  // for _mkdir
+#endif
+
 namespace network_log {
 
 class Logger::Impl {
@@ -50,8 +57,8 @@ private:
         struct stat st;
         if (stat(path.c_str(), &st) != 0) {
             #if defined(_WIN32)
-            mkdir(path.c_str());
-            #else 
+            _mkdir(path.c_str());  // Windows使用_mkdir
+            #else
             mkdir(path.c_str(), 0755);
             #endif
         }
