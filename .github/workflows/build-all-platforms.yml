@@ -37,7 +37,7 @@ jobs:
       uses: actions/cache@v4
       with:
         path: C:\protobuf-3.19.5
-        key: protobuf-3.19.5-${{ runner.os }}-x64-v1
+        key: protobuf-3.19.5-${{ runner.os }}-x64-md-v2
 
     - name: 安装 vcpkg 依赖管理器
       run: |
@@ -53,7 +53,7 @@ jobs:
         if (-Not (Test-Path "C:\protobuf-3.19.5\bin\protoc.exe")) {
           curl -L -o protobuf-3.19.5.tar.gz https://github.com/protocolbuffers/protobuf/releases/download/v3.19.5/protobuf-cpp-3.19.5.tar.gz
           tar -xzf protobuf-3.19.5.tar.gz
-          cmake -B protobuf-build -S protobuf-3.19.5/cmake -G "Visual Studio 17 2022" -A x64 -DCMAKE_BUILD_TYPE=Release -Dprotobuf_BUILD_TESTS=OFF -Dprotobuf_MSVC_STATIC_RUNTIME=OFF -DCMAKE_INSTALL_PREFIX=C:\protobuf-3.19.5
+          cmake -B protobuf-build -S protobuf-3.19.5/cmake -G "Visual Studio 17 2022" -A x64 -DCMAKE_BUILD_TYPE=Release -Dprotobuf_BUILD_TESTS=OFF -Dprotobuf_MSVC_STATIC_RUNTIME=OFF -DCMAKE_INSTALL_PREFIX=C:\protobuf-3.19.5 -Dprotobuf_WITH_ZLIB=OFF
           cmake --build protobuf-build --config Release --parallel 4
           cmake --install protobuf-build --config Release
         } else {
