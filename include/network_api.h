@@ -1,6 +1,17 @@
 #ifndef NETWORK_API_H
 #define NETWORK_API_H
 
+// Windows DLL 导出/导入宏
+#ifdef _WIN32
+    #ifdef NETWORK_EXPORTS
+        #define NETWORK_API __declspec(dllexport)
+    #else
+        #define NETWORK_API __declspec(dllimport)
+    #endif
+#else
+    #define NETWORK_API
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -40,31 +51,31 @@ typedef void (*DataCallback)(const char* data, int len, void* userdata);
 typedef void (*ErrorCallback)(int  code, const char* msg, void* userdata);
 
 // 创建/销毁实例
-NetworkHandle network_create();
-void network_destroy(NetworkHandle handle);
+NETWORK_API NetworkHandle network_create();
+NETWORK_API void network_destroy(NetworkHandle handle);
 
 // 连接管理
-int network_connect(NetworkHandle handle, const ConnectOptionsC* options);
-void network_disconnect(NetworkHandle handle);
+NETWORK_API int network_connect(NetworkHandle handle, const ConnectOptionsC* options);
+NETWORK_API void network_disconnect(NetworkHandle handle);
 
 // 数据发送
-int network_send(NetworkHandle handle, 
-                const char* data, 
+NETWORK_API int network_send(NetworkHandle handle,
+                const char* data,
                 int len,
                 int msg_type,
                 int encrypt);
 
 // 回调设置
-void network_set_callbacks(NetworkHandle handle,
+NETWORK_API void network_set_callbacks(NetworkHandle handle,
                           DataCallback data_cb,
                           ErrorCallback error_cb,
                           void* userdata);
 
 // 新增心跳控制接口
 // --------------------------
-int network_start_heartbeat(NetworkHandle handle, int interval_sec);
-int network_stop_heartbeat(NetworkHandle handle);
-// int network_set_heartbeat_interval(NetworkHandle handle, int interval_sec);   
+NETWORK_API int network_start_heartbeat(NetworkHandle handle, int interval_sec);
+NETWORK_API int network_stop_heartbeat(NetworkHandle handle);
+// int network_set_heartbeat_interval(NetworkHandle handle, int interval_sec);
 
 #ifdef __cplusplus
 }
