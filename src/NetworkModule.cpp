@@ -15,6 +15,14 @@
     #include <boost/asio.hpp>
     #include <boost/asio/ip/tcp.hpp>
     #define USE_NATIVE_SOCKET 0
+
+    // Windows 平台定义
+    #ifdef _WIN32
+        #define SHUT_RDWR SD_BOTH
+        #ifndef _WIN32_WINNT
+            #define _WIN32_WINNT 0x0601  // Windows 7
+        #endif
+    #endif
 #endif
 
 #include "common.h"
@@ -367,7 +375,7 @@ namespace tutorial {
             printf("\n");
 
             // NET_LOG_INFO("raw_data:  [%d]",raw_data.size());
-            send_ok = (send(sockfd_, raw_data.data(), raw_data.size(), 0) >= 0);
+            send_ok = (send(sockfd_, reinterpret_cast<const char*>(raw_data.data()), static_cast<int>(raw_data.size()), 0) >= 0);
         }
 
         if (!send_ok) {
@@ -472,7 +480,7 @@ namespace tutorial {
         std::lock_guard<std::mutex> lock(socket_mutex_);
         if (sockfd_ == -1) return false;
 
-        int ret = send(sockfd_, heartbeat.data(), heartbeat.size(), 0);
+        int ret = send(sockfd_, reinterpret_cast<const char*>(heartbeat.data()), static_cast<int>(heartbeat.size()), 0);
         if (ret < 0) {
             NET_LOG_INFO("Heartbeat failed after reconnect");
             notify_error(NETWORK_ERR_HEARTBEAT_FAILED, "Heartbeat failed after reconnect");
@@ -521,7 +529,7 @@ namespace tutorial {
                 break;
             }
             std::lock_guard<std::mutex> lock(heartbeat_mutex_);
-            int ret = send(sockfd_, heartbeat.data(), heartbeat.size(), 0);
+            int ret = send(sockfd_, reinterpret_cast<const char*>(heartbeat.data()), static_cast<int>(heartbeat.size()), 0);
             if (ret < 0) {
                 char err_msg[256];
                 snprintf(err_msg, sizeof(err_msg), "Heartbeat failed: errno=%d (%s)",
@@ -554,7 +562,7 @@ namespace tutorial {
             }
 
             uint8_t temp[1024];
-            size_t bytes = recv(sockfd_, temp, sizeof(temp), 0);
+            int bytes = recv(sockfd_, reinterpret_cast<char*>(temp), sizeof(temp), 0);
             if (bytes == 0) {
                 NET_LOG_INFO("Connection closed by peer");
                 bool need_reconnect = false;
