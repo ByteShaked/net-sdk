@@ -22,37 +22,65 @@ jobs:
       with:
         arch: x64
 
+    - name: 缓存 vcpkg
+      uses: actions/cache@v4
+      with:
+        path: |
+          C:\vcpkg\installed
+          C:\vcpkg\packages
+          C:\vcpkg\buildtrees
+        key: vcpkg-${{ runner.os }}-x64-${{ hashFiles('**/vcpkg.json', '**/vcpkg-configuration.json') }}-v2
+        restore-keys: |
+          vcpkg-${{ runner.os }}-x64-
+
+    - name: 缓存 Protobuf
+      uses: actions/cache@v4
+      with:
+        path: C:\protobuf-3.19.5
+        key: protobuf-3.19.5-${{ runner.os }}-x64-v1
+
     - name: 安装 vcpkg 依赖管理器
       run: |
-        git clone https://github.com/microsoft/vcpkg.git C:\vcpkg
-        C:\vcpkg\bootstrap-vcpkg.bat
+        if (-Not (Test-Path "C:\vcpkg")) {
+          git clone https://github.com/microsoft/vcpkg.git C:\vcpkg
+        }
+        cd C:\vcpkg
+        .\bootstrap-vcpkg.bat
         echo "VCPKG_ROOT=C:\vcpkg" >> $env:GITHUB_ENV
 
     - name: 编译安装 Protobuf 3.19.5
       run: |
-        curl -L -o protobuf-3.19.5.tar.gz https://github.com/protocolbuffers/protobuf/releases/download/v3.19.5/protobuf-cpp-3.19.5.tar.gz
-        tar -xzf protobuf-3.19.5.tar.gz
-
-        cmake -B protobuf-build -S protobuf-3.19.5/cmake -G "Visual Studio 17 2022" -A x64 -DCMAKE_BUILD_TYPE=Release -Dprotobuf_BUILD_TESTS=OFF -Dprotobuf_MSVC_STATIC_RUNTIME=OFF -DCMAKE_INSTALL_PREFIX=C:\protobuf-3.19.5
-
-        cmake --build protobuf-build --config Release --parallel 4
-        cmake --install protobuf-build --config Release
+        if (-Not (Test-Path "C:\protobuf-3.19.5\bin\protoc.exe")) {
+          curl -L -o protobuf-3.19.5.tar.gz https://github.com/protocolbuffers/protobuf/releases/download/v3.19.5/protobuf-cpp-3.19.5.tar.gz
+          tar -xzf protobuf-3.19.5.tar.gz
+          cmake -B protobuf-build -S protobuf-3.19.5/cmake -G "Visual Studio 17 2022" -A x64 -DCMAKE_BUILD_TYPE=Release -Dprotobuf_BUILD_TESTS=OFF -Dprotobuf_MSVC_STATIC_RUNTIME=OFF -DCMAKE_INSTALL_PREFIX=C:\protobuf-3.19.5
+          cmake --build protobuf-build --config Release --parallel 4
+          cmake --install protobuf-build --config Release
+        } else {
+          Write-Host "Protobuf 已从缓存恢复"
+        }
 
     - name: 安装其他依赖 (Boost + ZLIB)
       run: |
-        C:\vcpkg\vcpkg install boost-system:x64-windows zlib:x64-windows
+        C:\vcpkg\vcpkg install boost-asio:x64-windows zlib:x64-windows
         C:\vcpkg\vcpkg integrate install
 
     - name: 验证依赖安装
       run: |
         echo "=== Boost 安装路径 ==="
         dir C:\vcpkg\installed\x64-windows\include\boost
+        echo ""
         echo "=== Protobuf 安装路径 ==="
         dir C:\protobuf-3.19.5\include\google\protobuf
+        echo ""
+        echo "=== vcpkg 已安装包 ==="
+        C:\vcpkg\vcpkg list
 
     - name: 配置 CMake
       run: |
-        cmake -B build-windows -G "Visual Studio 17 2022" -A x64 -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_BUILD_TYPE=Release -DProtobuf_INCLUDE_DIR=C:/protobuf-3.19.5/include -DProtobuf_LIBRARIES=C:/protobuf-3.19.5/lib/libprotobuf.lib -DProtobuf_PROTOC_EXECUTABLE=C:/protobuf-3.19.5/bin/protoc.exe -DBOOST_ROOT=C:/vcpkg/installed/x64-windows -DBoost_INCLUDE_DIR=C:/vcpkg/installed/x64-windows/include
+        $env:BOOST_ROOT="C:\vcpkg\installed\x64-windows"
+        $env:Boost_INCLUDE_DIR="C:\vcpkg\installed\x64-windows\include"
+        cmake -B build-windows -G "Visual Studio 17 2022" -A x64 -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_BUILD_TYPE=Release -DProtobuf_INCLUDE_DIR=C:/protobuf-3.19.5/include -DProtobuf_LIBRARIES=C:/protobuf-3.19.5/lib/libprotobuf.lib -DProtobuf_PROTOC_EXECUTABLE=C:/protobuf-3.19.5/bin/protoc.exe
 
     - name: 编译
       run: cmake --build build-windows --config Release --parallel 4
