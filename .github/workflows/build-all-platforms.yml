@@ -36,9 +36,9 @@ jobs:
         path: |
           C:\vcpkg\installed
           C:\vcpkg\packages
-          C:\vcpkg\buildtrees
-        key: vcpkg-boost-zlib-openssl-${{ runner.os }}-x64-v1
+        key: vcpkg-boost-zlib-openssl-${{ runner.os }}-x64-v2
         restore-keys: |
+          vcpkg-boost-zlib-openssl-${{ runner.os }}-x64-v
           vcpkg-boost-zlib-openssl-${{ runner.os }}-x64-
 
     - name: 编译安装 Protobuf 3.19.5
