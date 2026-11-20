@@ -37,9 +37,9 @@ jobs:
           C:\vcpkg\installed
           C:\vcpkg\packages
           C:\vcpkg\buildtrees
-        key: vcpkg-boost-zlib-${{ runner.os }}-x64-v1
+        key: vcpkg-boost-zlib-openssl-${{ runner.os }}-x64-v1
         restore-keys: |
-          vcpkg-boost-zlib-${{ runner.os }}-x64-
+          vcpkg-boost-zlib-openssl-${{ runner.os }}-x64-
 
     - name: 编译安装 Protobuf 3.19.5
       run: |
@@ -65,13 +65,13 @@ jobs:
         cd C:\vcpkg
         .\bootstrap-vcpkg.bat
 
-    - name: 安装依赖 (Boost + ZLIB)
+    - name: 安装依赖 (Boost + ZLIB + OpenSSL)
       run: |
         if (-Not (Test-Path "C:\vcpkg\installed\x64-windows\include\boost\asio.hpp")) {
-          Write-Host "安装 Boost 和 ZLIB..."
-          C:\vcpkg\vcpkg install boost-asio:x64-windows zlib:x64-windows
+          Write-Host "安装 Boost, ZLIB 和 OpenSSL..."
+          C:\vcpkg\vcpkg install boost-asio:x64-windows zlib:x64-windows openssl:x64-windows
         } else {
-          Write-Host "✅ Boost 和 ZLIB 已从缓存恢复"
+          Write-Host "✅ Boost, ZLIB 和 OpenSSL 已从缓存恢复"
         }
         C:\vcpkg\vcpkg integrate install
 
@@ -83,30 +83,17 @@ jobs:
         echo "=== Protobuf 安装路径 ==="
         dir C:\protobuf-3.19.5\include\google\protobuf
 
-    - name: 配置 CMake
+    - name: 配置 CMake (启用测试)
       run: |
-        cmake -B build-windows -G "Visual Studio 17 2022" -A x64 -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_BUILD_TYPE=Release -DProtobuf_INCLUDE_DIR=C:/protobuf-3.19.5/include -DProtobuf_LIBRARIES=C:/protobuf-3.19.5/lib/libprotobuf.lib -DProtobuf_PROTOC_EXECUTABLE=C:/protobuf-3.19.5/bin/protoc.exe
+        cmake -B build-windows -G "Visual Studio 17 2022" -A x64 -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=ON -DProtobuf_INCLUDE_DIR=C:/protobuf-3.19.5/include -DProtobuf_LIBRARIES=C:/protobuf-3.19.5/lib/libprotobuf.lib -DProtobuf_PROTOC_EXECUTABLE=C:/protobuf-3.19.5/bin/protoc.exe
 
-    - name: 编译库
+    - name: 编译库和测试用例
       run: cmake --build build-windows --config Release --parallel 4
 
-    - name: 编译测试用例
+    - name: 检查测试可执行文件
       run: |
-        echo "=== 编译 CI 测试用例 ==="
-        cl.exe /EHsc /std:c++17 /MT /Fe:test_ci.exe `
-          /I"include" `
-          /I"C:\protobuf-3.19.5\include" `
-          /I"C:\vcpkg\installed\x64-windows\include" `
-          test\app_ci_windows.cpp `
-          build-windows\Release\im_network.lib `
-          C:\protobuf-3.19.5\lib\libprotobuf.lib `
-          C:\vcpkg\installed\x64-windows\lib\zlib.lib `
-          ws2_32.lib `
-          /link /LIBPATH:"C:\vcpkg\installed\x64-windows\lib"
-
-        echo ""
-        echo "=== 检查测试可执行文件 ==="
-        dir test_ci.exe
+        echo "=== 查找测试可执行文件 ==="
+        Get-ChildItem -Path build-windows -Recurse -Include test_ci_windows.exe | Select-Object FullName
 
     - name: 运行测试
       run: |
@@ -115,12 +102,25 @@ jobs:
         echo "========================================="
         echo ""
 
-        # 复制必要的 DLL 到当前目录
-        Copy-Item build-windows\Release\*.dll . -Force -ErrorAction SilentlyContinue
-        Copy-Item C:\vcpkg\installed\x64-windows\bin\*.dll . -Force -ErrorAction SilentlyContinue
+        # 查找测试可执行文件
+        $testExe = Get-ChildItem -Path build-windows -Recurse -Include test_ci_windows.exe | Select-Object -First 1 -ExpandProperty FullName
+
+        if (-Not $testExe) {
+          echo "❌ 找不到测试可执行文件"
+          exit 1
+        }
+
+        echo "测试文件: $testExe"
+        echo ""
+
+        # 复制必要的 DLL 到测试目录
+        $testDir = Split-Path $testExe
+        Copy-Item build-windows\Release\*.dll $testDir -Force -ErrorAction SilentlyContinue
+        Copy-Item lib\*.dll $testDir -Force -ErrorAction SilentlyContinue
+        Copy-Item C:\vcpkg\installed\x64-windows\bin\*.dll $testDir -Force -ErrorAction SilentlyContinue
 
         # 运行测试
-        .\test_ci.exe
+        & $testExe
 
         $exitCode = $LASTEXITCODE
         echo ""

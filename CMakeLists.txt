@@ -145,3 +145,47 @@ set_target_properties(network PROPERTIES
     LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib
 )
+
+# ============================================================
+# CI 测试可执行文件（可选，通过 -DBUILD_TESTS=ON 启用）
+# ============================================================
+option(BUILD_TESTS "Build test executables" OFF)
+
+if(BUILD_TESTS)
+    message(STATUS "Building CI test executable")
+
+    # 查找 OpenSSL（测试用例需要 MD5）
+    find_package(OpenSSL REQUIRED)
+
+    add_executable(test_ci_windows
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/app_ci_windows.cpp
+        ${PROTO_SOURCES}
+    )
+
+    # Windows 平台使用静态运行时库
+    if(MSVC)
+        set_property(TARGET test_ci_windows PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+    endif()
+
+    target_include_directories(test_ci_windows PRIVATE
+        ${NETWORK_INCLUDE_DIRS}
+        ${Protobuf_INCLUDE_DIR}
+        ${OPENSSL_INCLUDE_DIR}
+    )
+
+    target_link_libraries(test_ci_windows PRIVATE
+        network
+        ${Protobuf_LIBRARIES}
+        ZLIB::ZLIB
+        OpenSSL::Crypto
+    )
+
+    # Windows 需要额外链接 winsock
+    if(WIN32)
+        target_link_libraries(test_ci_windows PRIVATE ws2_32)
+    endif()
+
+    set_target_properties(test_ci_windows PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/build-windows/Release
+    )
+endif()
