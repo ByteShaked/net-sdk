@@ -111,13 +111,48 @@ jobs:
         }
 
         echo "测试文件: $testExe"
+        $testDir = Split-Path $testExe
+        echo "测试目录: $testDir"
         echo ""
 
-        # 复制必要的 DLL 到测试目录
-        $testDir = Split-Path $testExe
-        Copy-Item build-windows\Release\*.dll $testDir -Force -ErrorAction SilentlyContinue
-        Copy-Item lib\*.dll $testDir -Force -ErrorAction SilentlyContinue
-        Copy-Item C:\vcpkg\installed\x64-windows\bin\*.dll $testDir -Force -ErrorAction SilentlyContinue
+        # 复制所有必要的 DLL 到测试目录
+        echo "=== 复制 DLL 文件 ==="
+
+        # 1. 网络库 DLL
+        if (Test-Path "build-windows\Release\*.dll") {
+          Copy-Item build-windows\Release\*.dll $testDir -Force
+          echo "✓ 已复制 build-windows\Release\*.dll"
+        }
+        if (Test-Path "lib\Release\*.dll") {
+          Copy-Item lib\Release\*.dll $testDir -Force
+          echo "✓ 已复制 lib\Release\*.dll"
+        }
+        if (Test-Path "lib\*.dll") {
+          Copy-Item lib\*.dll $testDir -Force
+          echo "✓ 已复制 lib\*.dll"
+        }
+
+        # 2. vcpkg 依赖 DLL (Boost, OpenSSL, zlib)
+        $vcpkgBin = "C:\vcpkg\installed\x64-windows\bin"
+        if (Test-Path $vcpkgBin) {
+          Get-ChildItem "$vcpkgBin\*.dll" | ForEach-Object {
+            Copy-Item $_.FullName $testDir -Force
+            echo "✓ 已复制 $($_.Name)"
+          }
+        }
+
+        echo ""
+        echo "=== 测试目录中的 DLL 文件 ==="
+        Get-ChildItem $testDir -Filter *.dll | Select-Object Name
+
+        echo ""
+        echo "=== 检查依赖 (dumpbin) ==="
+        dumpbin /dependents $testExe
+
+        echo ""
+        echo "========================================="
+        echo "运行测试"
+        echo "========================================="
 
         # 运行测试
         & $testExe
