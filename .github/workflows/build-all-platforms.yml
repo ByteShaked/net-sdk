@@ -87,8 +87,53 @@ jobs:
       run: |
         cmake -B build-windows -G "Visual Studio 17 2022" -A x64 -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_BUILD_TYPE=Release -DProtobuf_INCLUDE_DIR=C:/protobuf-3.19.5/include -DProtobuf_LIBRARIES=C:/protobuf-3.19.5/lib/libprotobuf.lib -DProtobuf_PROTOC_EXECUTABLE=C:/protobuf-3.19.5/bin/protoc.exe
 
-    - name: 编译
+    - name: 编译库
       run: cmake --build build-windows --config Release --parallel 4
+
+    - name: 编译测试用例
+      run: |
+        echo "=== 编译 CI 测试用例 ==="
+        cl.exe /EHsc /std:c++17 /MT /Fe:test_ci.exe `
+          /I"include" `
+          /I"C:\protobuf-3.19.5\include" `
+          /I"C:\vcpkg\installed\x64-windows\include" `
+          test\app_ci_windows.cpp `
+          build-windows\Release\im_network.lib `
+          C:\protobuf-3.19.5\lib\libprotobuf.lib `
+          C:\vcpkg\installed\x64-windows\lib\zlib.lib `
+          ws2_32.lib `
+          /link /LIBPATH:"C:\vcpkg\installed\x64-windows\lib"
+
+        echo ""
+        echo "=== 检查测试可执行文件 ==="
+        dir test_ci.exe
+
+    - name: 运行测试
+      run: |
+        echo "========================================="
+        echo "开始运行 Windows x64 网络库测试"
+        echo "========================================="
+        echo ""
+
+        # 复制必要的 DLL 到当前目录
+        Copy-Item build-windows\Release\*.dll . -Force -ErrorAction SilentlyContinue
+        Copy-Item C:\vcpkg\installed\x64-windows\bin\*.dll . -Force -ErrorAction SilentlyContinue
+
+        # 运行测试
+        .\test_ci.exe
+
+        $exitCode = $LASTEXITCODE
+        echo ""
+        echo "========================================="
+        echo "测试退出码: $exitCode"
+        echo "========================================="
+
+        if ($exitCode -ne 0) {
+          echo "❌ 测试失败"
+          exit $exitCode
+        } else {
+          echo "✅ 测试通过"
+        }
 
     - name: 检查编译产物
       run: |
